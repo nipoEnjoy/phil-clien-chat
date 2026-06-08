@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/25"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.npopov.philharmonic.client.ui.auth.LoginController"
+           styleClass="login-root">
+
+    <VBox fx:id="formBox"
+          alignment="CENTER"
+          spacing="0"
+          maxWidth="360"
+          styleClass="login-card">
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="6" styleClass="login-header">
+            <Label text="🎼" styleClass="login-logo"/>
+            <Label text="Филармония" styleClass="login-title"/>
+            <Label text="Система управления" styleClass="login-subtitle"/>
+        </VBox>
+
+        <!-- Form fields -->
+        <VBox spacing="12" styleClass="login-form">
+            <VBox.margin>
+                <Insets top="32" right="0" bottom="0" left="0"/>
+            </VBox.margin>
+
+            <VBox spacing="6">
+                <Label text="Логин" styleClass="field-label"/>
+                <TextField fx:id="usernameField"
+                           promptText="Введите логин"
+                           styleClass="text-field-lg"/>
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="Пароль" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField"
+                               promptText="Введите пароль"
+                               styleClass="text-field-lg"/>
+            </VBox>
+
+            <!-- Error message -->
+            <Label fx:id="errorLabel"
+                   wrapText="true"
+                   styleClass="error-label"/>
+
+            <!-- Submit -->
+            <VBox spacing="10" alignment="CENTER">
+                <VBox.margin>
+                    <Insets top="8"/>
+                </VBox.margin>
+                <Button fx:id="loginButton"
+                        text="Войти"
+                        maxWidth="Infinity"
+                        defaultButton="true"
+                        onAction="#handleLogin"
+                        styleClass="btn-primary-lg"/>
+                <ProgressIndicator fx:id="spinner"
+                                   prefWidth="28"
+                                   prefHeight="28"/>
+            </VBox>
+        </VBox>
+
+        <!-- Footer -->
+<!--        <Label styleClass="login-footer"-->
+<!--               text="Philharmonic DB Client v1.0">-->
+<!--            <VBox.margin>-->
+<!--                <Insets top="24" bottom="16"/>-->
+<!--            </VBox.margin>-->
+<!--        </Label>-->
+
+
+        <Label fx:id="footerLabel"
+               styleClass="server-label">
+            <VBox.margin>
+                <Insets top="24" bottom="16"/>
+            </VBox.margin>
+        </Label>
+
+    </VBox>
+</StackPane>

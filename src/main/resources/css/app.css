@@ -1,0 +1,407 @@
+/* ═══════════════════════════════════════════════════════
+   Philharmonic Client — Application Stylesheet
+   Base: AtlantaFX Primer Dark + custom overrides
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Root colors ────────────────────────────────────────── */
+.root {
+    -color-bg-primary:    #0d1117;
+    -color-bg-secondary:  #161b22;
+    -color-bg-card:       #1c2333;
+    -color-bg-hover:      #21293b;
+    -color-accent:        #4f8ef7;
+    -color-accent-hover:  #6aa3ff;
+    -color-danger:        #f85149;
+    -color-success:       #3fb950;
+    -color-warning:       #d29922;
+    -color-text-primary:  #e6edf3;
+    -color-text-secondary:#8b949e;
+    -color-text-muted:    #484f58;
+    -color-border:        #30363d;
+    -color-border-subtle: #21262d;
+
+    -fx-font-family: "Segoe UI", "SF Pro Display", "Helvetica Neue", sans-serif;
+    -fx-font-size: 13px;
+    -fx-base:          #0d1117;
+    -fx-background:    #0d1117;
+    -fx-control-inner-background: #161b22;
+    -fx-text-fill: -color-text-primary;
+}
+
+/* ── Login Screen ───────────────────────────────────────── */
+.login-root {
+    -fx-background-color: -color-bg-primary;
+}
+
+.login-card {
+    -fx-background-color: -color-bg-card;
+    -fx-background-radius: 16;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 32, 0, 0, 8);
+}
+
+.login-header {
+    -fx-padding: 32 32 0 32;
+}
+
+.login-logo {
+    -fx-font-size: 42px;
+}
+
+.login-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.login-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-secondary;
+}
+
+.login-form {
+    -fx-padding: 0 32 0 32;
+}
+
+.login-footer {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-text-muted;
+}
+
+.field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-secondary;
+}
+
+.text-field-lg {
+    -fx-font-size: 14px;
+    -fx-padding: 10 14;
+    -fx-background-color: -color-bg-secondary;
+    -fx-background-radius: 8;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-text-fill: -color-text-primary;
+    -fx-prompt-text-fill: -color-text-muted;
+}
+
+.text-field-lg:focused {
+    -fx-border-color: -color-accent;
+    -fx-border-width: 1.5;
+}
+
+.btn-primary-lg {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 0;
+    -fx-background-color: -color-accent;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.btn-primary-lg:hover {
+    -fx-background-color: -color-accent-hover;
+}
+
+.btn-primary-lg:disabled {
+    -fx-opacity: 0.5;
+}
+
+.error-label {
+    -fx-text-fill: -color-danger;
+    -fx-font-size: 12px;
+    -fx-padding: 6 10;
+    -fx-background-color: rgba(248, 81, 73, 0.12);
+    -fx-background-radius: 6;
+}
+
+/* ── Top Bar ────────────────────────────────────────────── */
+.main-root {
+    -fx-background-color: -color-bg-primary;
+}
+
+.top-bar {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 20;
+    -fx-pref-height: 52;
+}
+
+.topbar-logo {
+    -fx-font-size: 22px;
+}
+
+.topbar-title {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.auth-area {
+    -fx-padding: 4 0;
+}
+
+.role-badge {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 8;
+    -fx-background-color: rgba(79, 142, 247, 0.18);
+    -fx-text-fill: -color-accent;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(79, 142, 247, 0.35);
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}
+
+.username-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-primary;
+}
+
+.btn-logout {
+    -fx-font-size: 12px;
+    -fx-padding: 5 12;
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-secondary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-logout:hover {
+    -fx-background-color: rgba(248, 81, 73, 0.12);
+    -fx-text-fill: -color-danger;
+    -fx-border-color: -color-danger;
+}
+
+/* ── Tab Pane ───────────────────────────────────────────── */
+.main-tabs {
+    -fx-background-color: -color-bg-primary;
+    -fx-tab-min-height: 40;
+}
+
+.main-tabs .tab-header-area {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 8;
+}
+
+.main-tabs .tab {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-secondary;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.main-tabs .tab:hover {
+    -fx-text-fill: -color-text-primary;
+    -fx-background-color: -color-bg-hover;
+}
+
+.main-tabs .tab:selected {
+    -fx-text-fill: -color-accent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -color-accent transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.main-tabs .tab-content-area {
+    -fx-background-color: -color-bg-primary;
+    -fx-padding: 0;
+}
+
+/* ── Status Bar ─────────────────────────────────────────── */
+.status-bar {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 4 16;
+    -fx-pref-height: 28;
+}
+
+.status-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-text-muted;
+}
+
+.server-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-text-muted;
+    -fx-font-family: monospace;
+}
+
+/* ── Generic table styling ──────────────────────────────── */
+.table-view {
+    -fx-background-color: -color-bg-primary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.table-view .column-header {
+    -fx-background-color: -color-bg-secondary;
+    -fx-text-fill: -color-text-secondary;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 0 12;
+    -fx-pref-height: 38;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -color-bg-secondary;
+}
+
+.table-row-cell {
+    -fx-background-color: -color-bg-primary;
+    -fx-border-color: transparent transparent -color-border-subtle transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0;
+    -fx-pref-height: 40;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(79, 142, 247, 0.14);
+}
+
+.table-row-cell .table-cell {
+    -fx-text-fill: -color-text-primary;
+    -fx-padding: 0 12;
+    -fx-font-size: 13px;
+}
+
+/* ── Tab content area utilities ─────────────────────────── */
+.tab-content-root {
+    -fx-background-color: -color-bg-primary;
+    -fx-padding: 16;
+}
+
+.toolbar-row {
+    -fx-padding: 0 0 12 0;
+    -fx-spacing: 10;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.search-field {
+    -fx-pref-width: 240;
+    -fx-font-size: 13px;
+    -fx-padding: 7 12;
+    -fx-background-color: -color-bg-secondary;
+    -fx-background-radius: 6;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-text-fill: -color-text-primary;
+    -fx-prompt-text-fill: -color-text-muted;
+}
+
+.search-field:focused {
+    -fx-border-color: -color-accent;
+}
+
+.btn-action {
+    -fx-font-size: 12px;
+    -fx-padding: 6 14;
+    -fx-background-color: -color-accent;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-action:hover {
+    -fx-background-color: -color-accent-hover;
+}
+
+.btn-secondary {
+    -fx-font-size: 12px;
+    -fx-padding: 6 14;
+    -fx-background-color: -color-bg-secondary;
+    -fx-text-fill: -color-text-primary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+.btn-danger {
+    -fx-font-size: 12px;
+    -fx-padding: 6 14;
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-danger;
+    -fx-border-color: -color-danger;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-danger:hover {
+    -fx-background-color: rgba(248, 81, 73, 0.12);
+}
+
+.combo-box {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: -color-text-primary;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -color-bg-card;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: -color-text-primary;
+    -fx-background-color: transparent;
+    -fx-padding: 6 12;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+/* ── ScrollBar ──────────────────────────────────────────── */
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: -color-border;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: -color-text-muted;
+}
+
+.scroll-bar .track, .scroll-bar .track-background,
+.scroll-bar .increment-button, .scroll-bar .decrement-button,
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0;
+    -fx-pref-width: 0;
+}
