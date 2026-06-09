@@ -1,27 +1,37 @@
 package com.npopov.philharmonic.client.model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class RoleModel {
+    Long id;
     String name;
     String description;
-    Map<CrudPermissions, Boolean> permissions;
+    Set<CrudPermissions> permissions;
 
-    public RoleModel(String name, String description, Map<CrudPermissions, Boolean> permissions) {
+    public RoleModel(Long id, String name, String description, Set<CrudPermissions> permissions) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.permissions = permissions;
+        this.permissions = permissions != null ? permissions : new HashSet<>();
     }
 
     public RoleModel() {
-        this.name = "";
-        this.description = "";
-        this.permissions = new HashMap<>();
-        this.permissions.put(CrudPermissions.CREATE, false);
-        this.permissions.put(CrudPermissions.READ, false);
-        this.permissions.put(CrudPermissions.DELETE, false);
-        this.permissions.put(CrudPermissions.UPDATE, false);
+        this.permissions = new HashSet<>();
+    }
+
+    @Override
+    public String toString() {
+        return name != null ? name : "";
+    }
+
+    public Set<CrudPermissions> getPermissions() { return permissions; }
+    public void setPermissions(Set<CrudPermissions> permissions) { this.permissions = permissions; }
+
+    public boolean hasPermission(CrudPermissions permission) {
+        return permissions != null && permissions.contains(permission);
     }
 
     public String getName() {
@@ -40,19 +50,19 @@ public class RoleModel {
         this.description = description;
     }
 
-    public Map<CrudPermissions, Boolean> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Map<CrudPermissions, Boolean> permissions) {
-        this.permissions = permissions;
-    }
-
     public Boolean getPermission(CrudPermissions permission) {
-        return permissions.get(permission);
+        return permissions.add(permission);
     }
 
-    public void setPermission(CrudPermissions permission, boolean value) {
-        permissions.put(permission, value);
+    public void setPermission(CrudPermissions permission) {
+        permissions.add(permission);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

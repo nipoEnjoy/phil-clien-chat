@@ -4,49 +4,40 @@ import com.npopov.philharmonic.client.api.EventApiClient;
 import com.npopov.philharmonic.client.model.EventModel;
 import com.npopov.philharmonic.client.ui.components.BaseTabController;
 import com.npopov.philharmonic.client.ui.dialog.EventDialog;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.util.StringConverter;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 public class EventsTabController extends BaseTabController<EventModel> {
 
-    private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-
     @Override
     protected void buildColumns() {
-        TableColumn<EventModel, Long>   colId    = col("ID",       60,  "id");
-        TableColumn<EventModel, String> colTitle = col("Название", 200, "title");
-        TableColumn<EventModel, String> colType  = col("Тип",      110, "eventType");
-        TableColumn<EventModel, String> colVenue = col("Площадка", 160, "venueName");
-        TableColumn<EventModel, String> colOrg   = col("Организатор", 160, "organizerName");
+        TableColumn<EventModel, Long> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idCol.setPrefWidth(60);
 
-        TableColumn<EventModel, String> colStart = new TableColumn<>("Начало");
-        colStart.setPrefWidth(130);
-        colStart.setCellValueFactory(cd -> new SimpleStringProperty(
-                cd.getValue().getStartDatetime() != null
-                        ? cd.getValue().getStartDatetime().format(FMT) : ""));
+        TableColumn<EventModel, String> titleCol = new TableColumn<>("Название");
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        titleCol.setPrefWidth(200);
 
-        TableColumn<EventModel, String> colEnd = new TableColumn<>("Конец");
-        colEnd.setPrefWidth(130);
-        colEnd.setCellValueFactory(cd -> new SimpleStringProperty(
-                cd.getValue().getEndDatetime() != null
-                        ? cd.getValue().getEndDatetime().format(FMT) : ""));
+        TableColumn<EventModel, String> typeCol = new TableColumn<>("Тип");
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+        typeCol.setPrefWidth(120);
 
-        tableView.getColumns().addAll(colId, colTitle, colType, colVenue, colOrg, colStart, colEnd);
-        tableView.getSortOrder().add(colStart);
+        TableColumn<EventModel, String> venueCol = new TableColumn<>("Площадка");
+        venueCol.setCellValueFactory(new PropertyValueFactory<>("venueName"));
+        venueCol.setPrefWidth(150);
+
+        TableColumn<EventModel, String> startCol = new TableColumn<>("Начало");
+        startCol.setCellValueFactory(new PropertyValueFactory<>("startDatetime"));
+        startCol.setPrefWidth(150);
+
+        TableColumn<EventModel, String> endCol = new TableColumn<>("Конец");
+        endCol.setCellValueFactory(new PropertyValueFactory<>("endDatetime"));
+        endCol.setPrefWidth(150);
+
+        tableView.getColumns().addAll(idCol, titleCol, typeCol, venueCol, startCol, endCol);
     }
 
     @Override
@@ -55,12 +46,14 @@ public class EventsTabController extends BaseTabController<EventModel> {
     }
 
     @Override
-    protected Predicate<EventModel> buildFilter(String q) {
-        if (q == null || q.isBlank()) return p -> true;
-        return e -> str(e.getTitle()).toLowerCase().contains(q)
-                || str(e.getEventType()).toLowerCase().contains(q)
-                || str(e.getVenueName()).toLowerCase().contains(q)
-                || str(e.getOrganizerName()).toLowerCase().contains(q);
+    protected Predicate<EventModel> buildFilter(String searchText) {
+        return e -> {
+            if (searchText == null || searchText.isBlank()) return true;
+            String lower = searchText.toLowerCase();
+            return (e.getTitle() != null && e.getTitle().toLowerCase().contains(lower)) ||
+                    (e.getEventType() != null && e.getEventType().toLowerCase().contains(lower)) ||
+                    (e.getVenueName() != null && e.getVenueName().toLowerCase().contains(lower));
+        };
     }
 
     @Override
@@ -70,7 +63,9 @@ public class EventsTabController extends BaseTabController<EventModel> {
             try {
                 EventApiClient.getInstance().create(body);
                 refresh();
-            } catch (Exception ex) { showError(ex.getMessage()); }
+            } catch (Exception ex) {
+                showError(ex.getMessage());
+            }
         });
     }
 
@@ -81,19 +76,14 @@ public class EventsTabController extends BaseTabController<EventModel> {
             try {
                 EventApiClient.getInstance().update(item.getId(), body);
                 refresh();
-            } catch (Exception ex) { showError(ex.getMessage()); }
+            } catch (Exception ex) {
+                showError(ex.getMessage());
+            }
         });
     }
 
     @Override
     protected void deleteSelected(EventModel item) {
         EventApiClient.getInstance().delete(item.getId());
-    }
-
-    private <V> TableColumn<EventModel, V> col(String title, double width, String prop) {
-        TableColumn<EventModel, V> c = new TableColumn<>(title);
-        c.setPrefWidth(width);
-        c.setCellValueFactory(new PropertyValueFactory<>(prop));
-        return c;
     }
 }

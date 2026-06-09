@@ -3,6 +3,7 @@ package com.npopov.philharmonic.client.ui.tabs;
 import com.npopov.philharmonic.client.api.CompetitionResultApiClient;
 import com.npopov.philharmonic.client.model.CompetitionResultModel;
 import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import com.npopov.philharmonic.client.ui.dialog.CompetitionResultDialog;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -39,17 +40,23 @@ public class CompetitionResultsTabController extends BaseTabController<Competiti
 
     @Override
     protected void showCreateDialog() {
-        dialog(null).showAndWait().ifPresent(body -> {
-            try { CompetitionResultApiClient.getInstance().create(body); refresh(); }
-            catch (Exception ex) { showError(ex.getMessage()); }
+        CompetitionResultDialog dialog = new CompetitionResultDialog(null);
+        dialog.showAndWait().ifPresent(body -> {
+            try {
+                CompetitionResultApiClient.getInstance().create(body);
+                refresh();
+            } catch (Exception ex) { showError(ex.getMessage()); }
         });
     }
 
     @Override
     protected void showEditDialog(CompetitionResultModel item) {
-        dialog(item).showAndWait().ifPresent(body -> {
-            try { CompetitionResultApiClient.getInstance().update(item.getId(), body); refresh(); }
-            catch (Exception ex) { showError(ex.getMessage()); }
+        CompetitionResultDialog dialog = new CompetitionResultDialog(item);
+        dialog.showAndWait().ifPresent(body -> {
+            try {
+                CompetitionResultApiClient.getInstance().update(item.getId(), body);
+                refresh();
+            } catch (Exception ex) { showError(ex.getMessage()); }
         });
     }
 

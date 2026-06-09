@@ -25,10 +25,12 @@ public class EventApiClient extends BaseApiClient {
     }
 
     public EventModel create(Map<String, Object> body) {
+        System.out.println("Sending data: /api/events " + body);
         return post("/api/events", body, EventModel.class);
     }
 
     public EventModel update(Long id, Map<String, Object> body) {
+        System.out.println("Sending data /api/events/: " + body);
         return put("/api/events/" + id, body, EventModel.class);
     }
 

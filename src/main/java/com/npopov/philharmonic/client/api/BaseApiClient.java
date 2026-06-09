@@ -93,25 +93,36 @@ public abstract class BaseApiClient {
                 .header("Accept", "application/json");
     }
 
-    private HttpRequest.BodyPublisher jsonBody(Object obj) {
-        try {
-            return HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(obj));
-        } catch (Exception e) {
-            throw new ApiException("Failed to serialize request body", e);
-        }
-    }
+//    private HttpRequest.BodyPublisher jsonBody(Object obj) {
+//        try {
+//            return HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(obj));
+//        } catch (Exception e) {
+//            throw new ApiException("Failed to serialize request body", e);
+//        }
+//    }
 
     private String execute(HttpRequest request) {
+        logRequest(request);
         try {
             HttpResponse<String> response = HttpClientFactory.get()
                     .send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() >= 200 && response.statusCode() < 300) {
-                return response.body();
+            int status = response.statusCode();
+            String respBody = response.body();
+
+            // логировать статус и укороченный ответ
+            String preview = respBody == null ? "" :
+                    (respBody.length() <= 2000 ? respBody : respBody.substring(0, 2000) + "...(truncated)");
+            System.out.printf("[API RESPONSE] %s %s -> %d, body length=%d%n%s%n",
+                    request.method(), request.uri(), status,
+                    respBody == null ? 0 : respBody.length(), preview);
+
+            if (status >= 200 && status < 300) {
+                return respBody;
             }
 
-            throw new ApiException(response.statusCode(),
-                    "Server error " + response.statusCode() + ": " + response.body());
+            throw new ApiException(status,
+                    "Server error " + status + ": " + respBody);
 
         } catch (ApiException ex) {
             throw ex;
@@ -135,6 +146,60 @@ public abstract class BaseApiClient {
             return mapper.readValue(body, ref);
         } catch (Exception e) {
             throw new ApiException("Failed to parse response list: " + e.getMessage(), e);
+        }
+    }
+
+    // ── Logging ─────────────────────────────────────────────────────────────
+
+    private static final ThreadLocal<String> requestBodyTL = new ThreadLocal<>();
+
+    private HttpRequest.BodyPublisher jsonBody(Object obj) {
+        try {
+            String json = mapper.writeValueAsString(obj);
+            // сохраняем в ThreadLocal чтобы log() мог прочитать
+            requestBodyTL.set(json);
+            return HttpRequest.BodyPublishers.ofString(json);
+        } catch (Exception e) {
+            throw new ApiException("Failed to serialize request body", e);
+        }
+    }
+
+    private void logRequest(HttpRequest request) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[API REQUEST] ")
+                    .append(request.method())
+                    .append(" ")
+                    .append(request.uri())
+                    .append("\n");
+
+            sb.append("Timeout: ").append(request.timeout().orElse(timeout)).append("\n");
+
+            // Headers — redact Authorization
+            sb.append("Headers:\n");
+            request.headers().map().forEach((k, v) -> {
+                String value = String.join(", ", v);
+                if ("authorization".equalsIgnoreCase(k)) {
+                    value = "[REDACTED]";
+                }
+                sb.append("  ").append(k).append(": ").append(value).append("\n");
+            });
+
+            // Body: print saved JSON (if any), truncated to e.g. 2000 chars
+            String body = requestBodyTL.get();
+            if (body != null) {
+                int max = 2000;
+                String preview = body.length() <= max ? body : body.substring(0, max) + "...(truncated)";
+                sb.append("Body (json): length=").append(body.length()).append("\n").append(preview).append("\n");
+            } else {
+                sb.append("Body: none or not-captured\n");
+            }
+
+            System.out.println(sb.toString());
+        } catch (Exception e) {
+            System.out.println("[API REQUEST] (failed to log request: " + e.getMessage() + ")");
+        } finally {
+            requestBodyTL.remove();
         }
     }
 }

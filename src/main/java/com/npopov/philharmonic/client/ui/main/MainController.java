@@ -29,8 +29,10 @@ public class MainController {
     @FXML private StackPane competitionsPane;
     @FXML private StackPane resultsPane;
     @FXML private StackPane genresPane;
+    @FXML private StackPane usersPane;
+    @FXML private StackPane rolesPane;
 
-    private final boolean[] loaded = new boolean[8];
+    private final boolean[] loaded = new boolean[10];
 
     @FXML
     public void initialize() {
@@ -43,6 +45,10 @@ public class MainController {
                 (obs, oldTab, newTab) -> loadTabIfNeeded(newTab));
 
         loadTabIfNeeded(tabPane.getSelectionModel().getSelectedItem());
+
+        if (!SessionManager.getInstance().isSuperAdmin()) {
+            tabPane.getTabs().removeIf(tab -> tab.getText().equals("Пользователи") || tab.getText().equals("Роли"));
+        }
     }
 
     private void loadTabIfNeeded(Tab tab) {
@@ -60,6 +66,8 @@ public class MainController {
             case 5 -> "/fxml/tabs/competitions.fxml";
             case 6 -> "/fxml/tabs/results.fxml";
             case 7 -> "/fxml/tabs/genres.fxml";
+            case 8 -> "/fxml/tabs/users.fxml";
+            case 9 -> "/fxml/tabs/roles.fxml";
             default -> null;
         };
 
@@ -72,6 +80,8 @@ public class MainController {
             case 5 -> competitionsPane;
             case 6 -> resultsPane;
             case 7 -> genresPane;
+            case 8 -> usersPane;
+            case 9 -> rolesPane;
             default -> null;
         };
 

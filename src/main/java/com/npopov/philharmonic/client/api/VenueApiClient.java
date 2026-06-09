@@ -21,10 +21,12 @@ public class VenueApiClient extends BaseApiClient {
     }
 
     public VenueModel create(Map<String, Object> body) {
+        System.out.println("Sending data /api/venues: " + body);
         return post("/api/venues", body, VenueModel.class);
     }
 
     public VenueModel update(Long id, Map<String, Object> body) {
+        System.out.println("Sending data /api/venues: " + body);
         return put("/api/venues/" + id, body, VenueModel.class);
     }
 

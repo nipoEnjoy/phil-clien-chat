@@ -5,6 +5,7 @@ module com.npopov.philharmonic.client {
     requires com.fasterxml.jackson.datatype.jsr310;
     requires atlantafx.base;
     requires java.net.http;
+    requires commons.io;
 
     opens com.npopov.philharmonic.client to javafx.fxml;
     opens com.npopov.philharmonic.client.ui.auth to javafx.fxml;

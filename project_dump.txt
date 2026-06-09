@@ -1,0 +1,5042 @@
+===== .gitignore =====
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.kotlin
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+
+===== mvnw =====
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Maven Start Up Batch script
+#
+# Required ENV vars:
+# ------------------
+#   JAVA_HOME - location of a JDK home dir
+#
+# Optional ENV vars
+# -----------------
+#   M2_HOME - location of maven2's installed home dir
+#   MAVEN_OPTS - parameters passed to the Java VM when running Maven
+#     e.g. to debug Maven itself, use
+#       set MAVEN_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
+#   MAVEN_SKIP_RC - flag to disable loading of mavenrc files
+# ----------------------------------------------------------------------------
+
+if [ -z "$MAVEN_SKIP_RC" ] ; then
+
+  if [ -f /usr/local/etc/mavenrc ] ; then
+    . /usr/local/etc/mavenrc
+  fi
+
+  if [ -f /etc/mavenrc ] ; then
+    . /etc/mavenrc
+  fi
+
+  if [ -f "$HOME/.mavenrc" ] ; then
+    . "$HOME/.mavenrc"
+  fi
+
+fi
+
+# OS specific support.  $var _must_ be set to either true or false.
+cygwin=false;
+darwin=false;
+mingw=false
+case "`uname`" in
+  CYGWIN*) cygwin=true ;;
+  MINGW*) mingw=true;;
+  Darwin*) darwin=true
+    # Use /usr/libexec/java_home if available, otherwise fall back to /Library/Java/Home
+    # See https://developer.apple.com/library/mac/qa/qa1170/_index.html
+    if [ -z "$JAVA_HOME" ]; then
+      if [ -x "/usr/libexec/java_home" ]; then
+        export JAVA_HOME="`/usr/libexec/java_home`"
+      else
+        export JAVA_HOME="/Library/Java/Home"
+      fi
+    fi
+    ;;
+esac
+
+if [ -z "$JAVA_HOME" ] ; then
+  if [ -r /etc/gentoo-release ] ; then
+    JAVA_HOME=`java-config --jre-home`
+  fi
+fi
+
+if [ -z "$M2_HOME" ] ; then
+  ## resolve links - $0 may be a link to maven's home
+  PRG="$0"
+
+  # need this for relative symlinks
+  while [ -h "$PRG" ] ; do
+    ls=`ls -ld "$PRG"`
+    link=`expr "$ls" : '.*-> \(.*\)$'`
+    if expr "$link" : '/.*' > /dev/null; then
+      PRG="$link"
+    else
+      PRG="`dirname "$PRG"`/$link"
+    fi
+  done
+
+  saveddir=`pwd`
+
+  M2_HOME=`dirname "$PRG"`/..
+
+  # make it fully qualified
+  M2_HOME=`cd "$M2_HOME" && pwd`
+
+  cd "$saveddir"
+  # echo Using m2 at $M2_HOME
+fi
+
+# For Cygwin, ensure paths are in UNIX format before anything is touched
+if $cygwin ; then
+  [ -n "$M2_HOME" ] &&
+    M2_HOME=`cygpath --unix "$M2_HOME"`
+  [ -n "$JAVA_HOME" ] &&
+    JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+  [ -n "$CLASSPATH" ] &&
+    CLASSPATH=`cygpath --path --unix "$CLASSPATH"`
+fi
+
+# For Mingw, ensure paths are in UNIX format before anything is touched
+if $mingw ; then
+  [ -n "$M2_HOME" ] &&
+    M2_HOME="`(cd "$M2_HOME"; pwd)`"
+  [ -n "$JAVA_HOME" ] &&
+    JAVA_HOME="`(cd "$JAVA_HOME"; pwd)`"
+fi
+
+if [ -z "$JAVA_HOME" ]; then
+  javaExecutable="`which javac`"
+  if [ -n "$javaExecutable" ] && ! [ "`expr \"$javaExecutable\" : '\([^ ]*\)'`" = "no" ]; then
+    # readlink(1) is not available as standard on Solaris 10.
+    readLink=`which readlink`
+    if [ ! `expr "$readLink" : '\([^ ]*\)'` = "no" ]; then
+      if $darwin ; then
+        javaHome="`dirname \"$javaExecutable\"`"
+        javaExecutable="`cd \"$javaHome\" && pwd -P`/javac"
+      else
+        javaExecutable="`readlink -f \"$javaExecutable\"`"
+      fi
+      javaHome="`dirname \"$javaExecutable\"`"
+      javaHome=`expr "$javaHome" : '\(.*\)/bin'`
+      JAVA_HOME="$javaHome"
+      export JAVA_HOME
+    fi
+  fi
+fi
+
+if [ -z "$JAVACMD" ] ; then
+  if [ -n "$JAVA_HOME"  ] ; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+      # IBM's JDK on AIX uses strange locations for the executables
+      JAVACMD="$JAVA_HOME/jre/sh/java"
+    else
+      JAVACMD="$JAVA_HOME/bin/java"
+    fi
+  else
+    JAVACMD="`\\unset -f command; \\command -v java`"
+  fi
+fi
+
+if [ ! -x "$JAVACMD" ] ; then
+  echo "Error: JAVA_HOME is not defined correctly." >&2
+  echo "  We cannot execute $JAVACMD" >&2
+  exit 1
+fi
+
+if [ -z "$JAVA_HOME" ] ; then
+  echo "Warning: JAVA_HOME environment variable is not set."
+fi
+
+CLASSWORLDS_LAUNCHER=org.codehaus.plexus.classworlds.launcher.Launcher
+
+# traverses directory structure from process work directory to filesystem root
+# first directory with .mvn subdirectory is considered project base directory
+find_maven_basedir() {
+
+  if [ -z "$1" ]
+  then
+    echo "Path not specified to find_maven_basedir"
+    return 1
+  fi
+
+  basedir="$1"
+  wdir="$1"
+  while [ "$wdir" != '/' ] ; do
+    if [ -d "$wdir"/.mvn ] ; then
+      basedir=$wdir
+      break
+    fi
+    # workaround for JBEAP-8937 (on Solaris 10/Sparc)
+    if [ -d "${wdir}" ]; then
+      wdir=`cd "$wdir/.."; pwd`
+    fi
+    # end of workaround
+  done
+  echo "${basedir}"
+}
+
+# concatenates all lines of a file
+concat_lines() {
+  if [ -f "$1" ]; then
+    echo "$(tr -s '\n' ' ' < "$1")"
+  fi
+}
+
+BASE_DIR=`find_maven_basedir "$(pwd)"`
+if [ -z "$BASE_DIR" ]; then
+  exit 1;
+fi
+
+##########################################################################################
+# Extension to allow automatically downloading the maven-wrapper.jar from Maven-central
+# This allows using the maven wrapper in projects that prohibit checking in binary data.
+##########################################################################################
+if [ -r "$BASE_DIR/.mvn/wrapper/maven-wrapper.jar" ]; then
+    if [ "$MVNW_VERBOSE" = true ]; then
+      echo "Found .mvn/wrapper/maven-wrapper.jar"
+    fi
+else
+    if [ "$MVNW_VERBOSE" = true ]; then
+      echo "Couldn't find .mvn/wrapper/maven-wrapper.jar, downloading it ..."
+    fi
+    if [ -n "$MVNW_REPOURL" ]; then
+      jarUrl="$MVNW_REPOURL/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar"
+    else
+      jarUrl="https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar"
+    fi
+    while IFS="=" read key value; do
+      case "$key" in (wrapperUrl) jarUrl="$value"; break ;;
+      esac
+    done < "$BASE_DIR/.mvn/wrapper/maven-wrapper.properties"
+    if [ "$MVNW_VERBOSE" = true ]; then
+      echo "Downloading from: $jarUrl"
+    fi
+    wrapperJarPath="$BASE_DIR/.mvn/wrapper/maven-wrapper.jar"
+    if $cygwin; then
+      wrapperJarPath=`cygpath --path --windows "$wrapperJarPath"`
+    fi
+
+    if command -v wget > /dev/null; then
+        if [ "$MVNW_VERBOSE" = true ]; then
+          echo "Found wget ... using wget"
+        fi
+        if [ -z "$MVNW_USERNAME" ] || [ -z "$MVNW_PASSWORD" ]; then
+            wget "$jarUrl" -O "$wrapperJarPath" || rm -f "$wrapperJarPath"
+        else
+            wget --http-user=$MVNW_USERNAME --http-password=$MVNW_PASSWORD "$jarUrl" -O "$wrapperJarPath" || rm -f "$wrapperJarPath"
+        fi
+    elif command -v curl > /dev/null; then
+        if [ "$MVNW_VERBOSE" = true ]; then
+          echo "Found curl ... using curl"
+        fi
+        if [ -z "$MVNW_USERNAME" ] || [ -z "$MVNW_PASSWORD" ]; then
+            curl -o "$wrapperJarPath" "$jarUrl" -f
+        else
+            curl --user $MVNW_USERNAME:$MVNW_PASSWORD -o "$wrapperJarPath" "$jarUrl" -f
+        fi
+
+    else
+        if [ "$MVNW_VERBOSE" = true ]; then
+          echo "Falling back to using Java to download"
+        fi
+        javaClass="$BASE_DIR/.mvn/wrapper/MavenWrapperDownloader.java"
+        # For Cygwin, switch paths to Windows format before running javac
+        if $cygwin; then
+          javaClass=`cygpath --path --windows "$javaClass"`
+        fi
+        if [ -e "$javaClass" ]; then
+            if [ ! -e "$BASE_DIR/.mvn/wrapper/MavenWrapperDownloader.class" ]; then
+                if [ "$MVNW_VERBOSE" = true ]; then
+                  echo " - Compiling MavenWrapperDownloader.java ..."
+                fi
+                # Compiling the Java class
+                ("$JAVA_HOME/bin/javac" "$javaClass")
+            fi
+            if [ -e "$BASE_DIR/.mvn/wrapper/MavenWrapperDownloader.class" ]; then
+                # Running the downloader
+                if [ "$MVNW_VERBOSE" = true ]; then
+                  echo " - Running MavenWrapperDownloader.java ..."
+                fi
+                ("$JAVA_HOME/bin/java" -cp .mvn/wrapper MavenWrapperDownloader "$MAVEN_PROJECTBASEDIR")
+            fi
+        fi
+    fi
+fi
+##########################################################################################
+# End of extension
+##########################################################################################
+
+export MAVEN_PROJECTBASEDIR=${MAVEN_BASEDIR:-"$BASE_DIR"}
+if [ "$MVNW_VERBOSE" = true ]; then
+  echo $MAVEN_PROJECTBASEDIR
+fi
+MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
+
+# For Cygwin, switch paths to Windows format before running java
+if $cygwin; then
+  [ -n "$M2_HOME" ] &&
+    M2_HOME=`cygpath --path --windows "$M2_HOME"`
+  [ -n "$JAVA_HOME" ] &&
+    JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
+  [ -n "$CLASSPATH" ] &&
+    CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
+  [ -n "$MAVEN_PROJECTBASEDIR" ] &&
+    MAVEN_PROJECTBASEDIR=`cygpath --path --windows "$MAVEN_PROJECTBASEDIR"`
+fi
+
+# Provide a "standardized" way to retrieve the CLI args that will
+# work with both Windows and non-Windows executions.
+MAVEN_CMD_LINE_ARGS="$MAVEN_CONFIG $@"
+export MAVEN_CMD_LINE_ARGS
+
+WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
+
+exec "$JAVACMD" \
+  $MAVEN_OPTS \
+  $MAVEN_DEBUG_OPTS \
+  -classpath "$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar" \
+  "-Dmaven.home=${M2_HOME}" \
+  "-Dmaven.multiModuleProjectDirectory=${MAVEN_PROJECTBASEDIR}" \
+  ${WRAPPER_LAUNCHER} $MAVEN_CONFIG "$@"
+
+
+
+===== mvnw.cmd =====
+@REM ----------------------------------------------------------------------------
+@REM Licensed to the Apache Software Foundation (ASF) under one
+@REM or more contributor license agreements.  See the NOTICE file
+@REM distributed with this work for additional information
+@REM regarding copyright ownership.  The ASF licenses this file
+@REM to you under the Apache License, Version 2.0 (the
+@REM "License"); you may not use this file except in compliance
+@REM with the License.  You may obtain a copy of the License at
+@REM
+@REM    https://www.apache.org/licenses/LICENSE-2.0
+@REM
+@REM Unless required by applicable law or agreed to in writing,
+@REM software distributed under the License is distributed on an
+@REM "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+@REM KIND, either express or implied.  See the License for the
+@REM specific language governing permissions and limitations
+@REM under the License.
+@REM ----------------------------------------------------------------------------
+
+@REM ----------------------------------------------------------------------------
+@REM Maven Start Up Batch script
+@REM
+@REM Required ENV vars:
+@REM JAVA_HOME - location of a JDK home dir
+@REM
+@REM Optional ENV vars
+@REM M2_HOME - location of maven2's installed home dir
+@REM MAVEN_BATCH_ECHO - set to 'on' to enable the echoing of the batch commands
+@REM MAVEN_BATCH_PAUSE - set to 'on' to wait for a keystroke before ending
+@REM MAVEN_OPTS - parameters passed to the Java VM when running Maven
+@REM     e.g. to debug Maven itself, use
+@REM set MAVEN_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
+@REM MAVEN_SKIP_RC - flag to disable loading of mavenrc files
+@REM ----------------------------------------------------------------------------
+
+@REM Begin all REM lines with '@' in case MAVEN_BATCH_ECHO is 'on'
+@echo off
+@REM set title of command window
+title %0
+@REM enable echoing by setting MAVEN_BATCH_ECHO to 'on'
+@if "%MAVEN_BATCH_ECHO%" == "on"  echo %MAVEN_BATCH_ECHO%
+
+@REM set %HOME% to equivalent of $HOME
+if "%HOME%" == "" (set "HOME=%HOMEDRIVE%%HOMEPATH%")
+
+@REM Execute a user defined script before this one
+if not "%MAVEN_SKIP_RC%" == "" goto skipRcPre
+@REM check for pre script, once with legacy .bat ending and once with .cmd ending
+if exist "%USERPROFILE%\mavenrc_pre.bat" call "%USERPROFILE%\mavenrc_pre.bat" %*
+if exist "%USERPROFILE%\mavenrc_pre.cmd" call "%USERPROFILE%\mavenrc_pre.cmd" %*
+:skipRcPre
+
+@setlocal
+
+set ERROR_CODE=0
+
+@REM To isolate internal variables from possible post scripts, we use another setlocal
+@setlocal
+
+@REM ==== START VALIDATION ====
+if not "%JAVA_HOME%" == "" goto OkJHome
+
+echo.
+echo Error: JAVA_HOME not found in your environment. >&2
+echo Please set the JAVA_HOME variable in your environment to match the >&2
+echo location of your Java installation. >&2
+echo.
+goto error
+
+:OkJHome
+if exist "%JAVA_HOME%\bin\java.exe" goto init
+
+echo.
+echo Error: JAVA_HOME is set to an invalid directory. >&2
+echo JAVA_HOME = "%JAVA_HOME%" >&2
+echo Please set the JAVA_HOME variable in your environment to match the >&2
+echo location of your Java installation. >&2
+echo.
+goto error
+
+@REM ==== END VALIDATION ====
+
+:init
+
+@REM Find the project base dir, i.e. the directory that contains the folder ".mvn".
+@REM Fallback to current working directory if not found.
+
+set MAVEN_PROJECTBASEDIR=%MAVEN_BASEDIR%
+IF NOT "%MAVEN_PROJECTBASEDIR%"=="" goto endDetectBaseDir
+
+set EXEC_DIR=%CD%
+set WDIR=%EXEC_DIR%
+:findBaseDir
+IF EXIST "%WDIR%"\.mvn goto baseDirFound
+cd ..
+IF "%WDIR%"=="%CD%" goto baseDirNotFound
+set WDIR=%CD%
+goto findBaseDir
+
+:baseDirFound
+set MAVEN_PROJECTBASEDIR=%WDIR%
+cd "%EXEC_DIR%"
+goto endDetectBaseDir
+
+:baseDirNotFound
+set MAVEN_PROJECTBASEDIR=%EXEC_DIR%
+cd "%EXEC_DIR%"
+
+:endDetectBaseDir
+
+IF NOT EXIST "%MAVEN_PROJECTBASEDIR%\.mvn\jvm.config" goto endReadAdditionalConfig
+
+@setlocal EnableExtensions EnableDelayedExpansion
+for /F "usebackq delims=" %%a in ("%MAVEN_PROJECTBASEDIR%\.mvn\jvm.config") do set JVM_CONFIG_MAVEN_PROPS=!JVM_CONFIG_MAVEN_PROPS! %%a
+@endlocal & set JVM_CONFIG_MAVEN_PROPS=%JVM_CONFIG_MAVEN_PROPS%
+
+:endReadAdditionalConfig
+
+SET MAVEN_JAVA_EXE="%JAVA_HOME%\bin\java.exe"
+set WRAPPER_JAR="%MAVEN_PROJECTBASEDIR%\.mvn\wrapper\maven-wrapper.jar"
+set WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
+
+set DOWNLOAD_URL="https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar"
+
+FOR /F "usebackq tokens=1,2 delims==" %%A IN ("%MAVEN_PROJECTBASEDIR%\.mvn\wrapper\maven-wrapper.properties") DO (
+    IF "%%A"=="wrapperUrl" SET DOWNLOAD_URL=%%B
+)
+
+@REM Extension to allow automatically downloading the maven-wrapper.jar from Maven-central
+@REM This allows using the maven wrapper in projects that prohibit checking in binary data.
+if exist %WRAPPER_JAR% (
+    if "%MVNW_VERBOSE%" == "true" (
+        echo Found %WRAPPER_JAR%
+    )
+) else (
+    if not "%MVNW_REPOURL%" == "" (
+        SET DOWNLOAD_URL="%MVNW_REPOURL%/org/apache/maven/wrapper/maven-wrapper/3.1.0/maven-wrapper-3.1.0.jar"
+    )
+    if "%MVNW_VERBOSE%" == "true" (
+        echo Couldn't find %WRAPPER_JAR%, downloading it ...
+        echo Downloading from: %DOWNLOAD_URL%
+    )
+
+    powershell -Command "&{"^
+		"$webclient = new-object System.Net.WebClient;"^
+		"if (-not ([string]::IsNullOrEmpty('%MVNW_USERNAME%') -and [string]::IsNullOrEmpty('%MVNW_PASSWORD%'))) {"^
+		"$webclient.Credentials = new-object System.Net.NetworkCredential('%MVNW_USERNAME%', '%MVNW_PASSWORD%');"^
+		"}"^
+		"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $webclient.DownloadFile('%DOWNLOAD_URL%', '%WRAPPER_JAR%')"^
+		"}"
+    if "%MVNW_VERBOSE%" == "true" (
+        echo Finished downloading %WRAPPER_JAR%
+    )
+)
+@REM End of extension
+
+@REM Provide a "standardized" way to retrieve the CLI args that will
+@REM work with both Windows and non-Windows executions.
+set MAVEN_CMD_LINE_ARGS=%*
+
+%MAVEN_JAVA_EXE% ^
+  %JVM_CONFIG_MAVEN_PROPS% ^
+  %MAVEN_OPTS% ^
+  %MAVEN_DEBUG_OPTS% ^
+  -classpath %WRAPPER_JAR% ^
+  "-Dmaven.multiModuleProjectDirectory=%MAVEN_PROJECTBASEDIR%" ^
+  %WRAPPER_LAUNCHER% %MAVEN_CONFIG% %*
+if ERRORLEVEL 1 goto error
+goto end
+
+:error
+set ERROR_CODE=1
+
+:end
+@endlocal & set ERROR_CODE=%ERROR_CODE%
+
+if not "%MAVEN_SKIP_RC%"=="" goto skipRcPost
+@REM check for post script, once with legacy .bat ending and once with .cmd ending
+if exist "%USERPROFILE%\mavenrc_post.bat" call "%USERPROFILE%\mavenrc_post.bat"
+if exist "%USERPROFILE%\mavenrc_post.cmd" call "%USERPROFILE%\mavenrc_post.cmd"
+:skipRcPost
+
+@REM pause the script if MAVEN_BATCH_PAUSE is set to 'on'
+if "%MAVEN_BATCH_PAUSE%"=="on" pause
+
+if "%MAVEN_TERMINATE_CMD%"=="on" exit %ERROR_CODE%
+
+cmd /C exit /B %ERROR_CODE%
+
+
+
+===== pom.xml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.npopov</groupId>
+    <artifactId>philharmonic-client</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Philharmonic JavaFX Client</name>
+
+    <properties>
+        <java.version>25</java.version>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <javafx.version>25</javafx.version>
+        <jackson.version>2.17.1</jackson.version>
+        <atlantafx.version>2.0.1</atlantafx.version>
+    </properties>
+
+    <dependencies>
+        <!-- JavaFX -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <!-- AtlantaFX — современная тема для JavaFX -->
+        <dependency>
+            <groupId>io.github.mkpaz</groupId>
+            <artifactId>atlantafx-base</artifactId>
+            <version>${atlantafx.version}</version>
+        </dependency>
+
+        <!-- Jackson — JSON сериализация/десериализация -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.npopov.philharmonic.client.PhilharmonicApp</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>25</source>
+                    <target>25</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/HelloApplication.java =====
+package com.npopov.philharmonic.client;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class HelloApplication extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/HelloController.java =====
+package com.npopov.philharmonic.client;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+
+public class HelloController {
+    @FXML
+    private Label welcomeText;
+
+    @FXML
+    protected void onHelloButtonClick() {
+        welcomeText.setText("Welcome to JavaFX Application!");
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/Launcher.java =====
+package com.npopov.philharmonic.client;
+
+import javafx.application.Application;
+
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(HelloApplication.class, args);
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/PhilharmonicApp.java =====
+package com.npopov.philharmonic.client;
+
+import com.npopov.philharmonic.client.util.AppConfig;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+/**
+ * JavaFX application entry point.
+ * Opens the login screen; the main window loads after successful auth.
+ */
+public class PhilharmonicApp extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/fxml/login.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, AppConfig.LOGIN_WIDTH, AppConfig.LOGIN_HEIGHT);
+        scene.getStylesheets().add(
+                getClass().getResource("/css/app.css").toExternalForm());
+
+        primaryStage.setTitle("Филармония — Вход");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/ApiException.java =====
+package com.npopov.philharmonic.client.api;
+
+/**
+ * Thrown when the API returns a non-2xx response or a network error occurs.
+ */
+public class ApiException extends RuntimeException {
+
+    private final int statusCode;
+
+    public ApiException(int statusCode, String message) {
+        super(message);
+        this.statusCode = statusCode;
+    }
+
+    public ApiException(String message, Throwable cause) {
+        super(message, cause);
+        this.statusCode = 0;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public boolean isUnauthorized() {
+        return statusCode == 401;
+    }
+
+    public boolean isForbidden() {
+        return statusCode == 403;
+    }
+
+    public boolean isNotFound() {
+        return statusCode == 404;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/ArtistApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.npopov.philharmonic.client.model.ArtistModel;
+
+import java.util.List;
+import java.util.Map;
+
+public class ArtistApiClient extends BaseApiClient {
+
+    private static final ArtistApiClient INSTANCE = new ArtistApiClient();
+    public static ArtistApiClient getInstance() { return INSTANCE; }
+    private ArtistApiClient() {}
+
+    public List<ArtistModel> findAll() {
+        return getList("/api/artists", new TypeReference<>() {});
+    }
+
+    public List<ArtistModel> findByGenre(String genre) {
+        return getList("/api/artists?genre=" + encode(genre), new TypeReference<>() {});
+    }
+
+    public ArtistModel create(Map<String, Object> body) {
+        return post("/api/artists", body, ArtistModel.class);
+    }
+
+    public ArtistModel update(Long id, Map<String, Object> body) {
+        return put("/api/artists/" + id, body, ArtistModel.class);
+    }
+
+    public void delete(Long id) {
+        delete("/api/artists/" + id);
+    }
+
+    private String encode(String s) {
+        return java.net.URLEncoder.encode(s, java.nio.charset.StandardCharsets.UTF_8);
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/AuthApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * Handles POST /auth/login.
+ */
+public class AuthApiClient extends BaseApiClient {
+
+    private static final AuthApiClient INSTANCE = new AuthApiClient();
+
+    private AuthApiClient() {}
+
+    public static AuthApiClient getInstance() {
+        return INSTANCE;
+    }
+
+    /**
+     * Authenticates and returns a {@link LoginResult} containing the JWT token and roles.
+     *
+     * @throws ApiException with statusCode 401 if credentials are wrong.
+     */
+    public LoginResult login(String username, String password) {
+        Map<String, String> payload = Map.of(
+                "username", username,
+                "password", password
+        );
+        return postAnon("/auth/login", payload, LoginResult.class);
+    }
+
+    // ── Response model ────────────────────────────────────────────────────────
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class LoginResult {
+        private String token;
+        private List<String> roles;
+
+        public LoginResult() {}
+
+        public String getToken() { return token; }
+        public void setToken(String token) { this.token = token; }
+
+        public List<String> getRoles() { return roles != null ? roles : List.of(); }
+        public void setRoles(List<String> roles) { this.roles = roles; }
+
+        public Set<String> getRolesAsSet() {
+            return roles != null ? Set.copyOf(roles) : Set.of();
+        }
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/BaseApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.npopov.philharmonic.client.session.SessionManager;
+import com.npopov.philharmonic.client.util.AppConfig;
+import com.npopov.philharmonic.client.util.JsonMapper;
+
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.List;
+
+/**
+ * Base class for all API clients.
+ * Provides get / post / put / delete helpers that:
+ *  - attach the JWT Bearer header automatically
+ *  - throw {@link ApiException} on non-2xx responses
+ *  - deserialize the JSON body via Jackson
+ */
+public abstract class BaseApiClient {
+
+    protected final ObjectMapper mapper = JsonMapper.get();
+    private final Duration timeout = Duration.ofSeconds(AppConfig.REQUEST_TIMEOUT_SECONDS);
+
+    // ── GET ──────────────────────────────────────────────────────────────────
+
+    protected <T> T get(String path, Class<T> type) {
+        HttpRequest request = authorizedBuilder(path).GET().build();
+        String body = execute(request);
+        return deserialize(body, type);
+    }
+
+    protected <T> List<T> getList(String path, TypeReference<List<T>> ref) {
+        HttpRequest request = authorizedBuilder(path).GET().build();
+        String body = execute(request);
+        return deserializeList(body, ref);
+    }
+
+    // ── POST ─────────────────────────────────────────────────────────────────
+
+    protected <T> T post(String path, Object payload, Class<T> type) {
+        HttpRequest request = authorizedBuilder(path)
+                .POST(jsonBody(payload))
+                .header("Content-Type", "application/json")
+                .build();
+        String body = execute(request);
+        return deserialize(body, type);
+    }
+
+    /** POST without auth — used for /auth/login */
+    protected <T> T postAnon(String path, Object payload, Class<T> type) {
+        HttpRequest request = anonBuilder(path)
+                .POST(jsonBody(payload))
+                .header("Content-Type", "application/json")
+                .build();
+        String body = execute(request);
+        return deserialize(body, type);
+    }
+
+    // ── PUT ──────────────────────────────────────────────────────────────────
+
+    protected <T> T put(String path, Object payload, Class<T> type) {
+        HttpRequest request = authorizedBuilder(path)
+                .PUT(jsonBody(payload))
+                .header("Content-Type", "application/json")
+                .build();
+        String body = execute(request);
+        return deserialize(body, type);
+    }
+
+    // ── DELETE ───────────────────────────────────────────────────────────────
+
+    protected void delete(String path) {
+        HttpRequest request = authorizedBuilder(path)
+                .DELETE()
+                .build();
+        execute(request);
+    }
+
+    // ── Internals ─────────────────────────────────────────────────────────────
+
+    private HttpRequest.Builder authorizedBuilder(String path) {
+        return anonBuilder(path)
+                .header("Authorization", SessionManager.getInstance().bearerHeader());
+    }
+
+    private HttpRequest.Builder anonBuilder(String path) {
+        return HttpRequest.newBuilder()
+                .uri(URI.create(AppConfig.BASE_URL + path))
+                .timeout(timeout)
+                .header("Accept", "application/json");
+    }
+
+//    private HttpRequest.BodyPublisher jsonBody(Object obj) {
+//        try {
+//            return HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(obj));
+//        } catch (Exception e) {
+//            throw new ApiException("Failed to serialize request body", e);
+//        }
+//    }
+
+    private String execute(HttpRequest request) {
+        logRequest(request);
+        try {
+            HttpResponse<String> response = HttpClientFactory.get()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+
+            int status = response.statusCode();
+            String respBody = response.body();
+
+            // логировать статус и укороченный ответ
+            String preview = respBody == null ? "" :
+                    (respBody.length() <= 2000 ? respBody : respBody.substring(0, 2000) + "...(truncated)");
+            System.out.printf("[API RESPONSE] %s %s -> %d, body length=%d%n%s%n",
+                    request.method(), request.uri(), status,
+                    respBody == null ? 0 : respBody.length(), preview);
+
+            if (status >= 200 && status < 300) {
+                return respBody;
+            }
+
+            throw new ApiException(status,
+                    "Server error " + status + ": " + respBody);
+
+        } catch (ApiException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ApiException("Network error: " + ex.getMessage(), ex);
+        }
+    }
+
+    private <T> T deserialize(String body, Class<T> type) {
+        if (body == null || body.isBlank()) return null;
+        try {
+            return mapper.readValue(body, type);
+        } catch (Exception e) {
+            throw new ApiException("Failed to parse response: " + e.getMessage(), e);
+        }
+    }
+
+    private <T> List<T> deserializeList(String body, TypeReference<List<T>> ref) {
+        if (body == null || body.isBlank()) return List.of();
+        try {
+            return mapper.readValue(body, ref);
+        } catch (Exception e) {
+            throw new ApiException("Failed to parse response list: " + e.getMessage(), e);
+        }
+    }
+
+    // ── Logging ─────────────────────────────────────────────────────────────
+
+    private static final ThreadLocal<String> requestBodyTL = new ThreadLocal<>();
+
+    private HttpRequest.BodyPublisher jsonBody(Object obj) {
+        try {
+            String json = mapper.writeValueAsString(obj);
+            // сохраняем в ThreadLocal чтобы log() мог прочитать
+            requestBodyTL.set(json);
+            return HttpRequest.BodyPublishers.ofString(json);
+        } catch (Exception e) {
+            throw new ApiException("Failed to serialize request body", e);
+        }
+    }
+
+    private void logRequest(HttpRequest request) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[API REQUEST] ")
+                    .append(request.method())
+                    .append(" ")
+                    .append(request.uri())
+                    .append("\n");
+
+            sb.append("Timeout: ").append(request.timeout().orElse(timeout)).append("\n");
+
+            // Headers — redact Authorization
+            sb.append("Headers:\n");
+            request.headers().map().forEach((k, v) -> {
+                String value = String.join(", ", v);
+                if ("authorization".equalsIgnoreCase(k)) {
+                    value = "[REDACTED]";
+                }
+                sb.append("  ").append(k).append(": ").append(value).append("\n");
+            });
+
+            // Body: print saved JSON (if any), truncated to e.g. 2000 chars
+            String body = requestBodyTL.get();
+            if (body != null) {
+                int max = 2000;
+                String preview = body.length() <= max ? body : body.substring(0, max) + "...(truncated)";
+                sb.append("Body (json): length=").append(body.length()).append("\n").append(preview).append("\n");
+            } else {
+                sb.append("Body: none or not-captured\n");
+            }
+
+            System.out.println(sb.toString());
+        } catch (Exception e) {
+            System.out.println("[API REQUEST] (failed to log request: " + e.getMessage() + ")");
+        } finally {
+            requestBodyTL.remove();
+        }
+    }
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/CompetitionApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.npopov.philharmonic.client.model.CompetitionModel;
+import java.util.List;
+import java.util.Map;
+
+public class CompetitionApiClient extends BaseApiClient {
+    private static final String PATH = "/api/events/competition";
+
+    private static final CompetitionApiClient INSTANCE = new CompetitionApiClient();
+    public static CompetitionApiClient getInstance() { return INSTANCE; }
+    private CompetitionApiClient() {}
+
+    public List<CompetitionModel> findAll() {
+        return getList(PATH, new TypeReference<>() {});
+    }
+
+    public CompetitionModel create(Map<String, Object> body) {
+        return post(PATH, body, CompetitionModel.class);
+    }
+    public CompetitionModel update(Long id, Map<String, Object> body) {
+        return put(PATH + id, body, CompetitionModel.class);
+    }
+    public void delete(Long id) { delete(PATH + id); }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/CompetitionResultApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.npopov.philharmonic.client.model.CompetitionResultModel;
+import java.util.List;
+import java.util.Map;
+
+public class CompetitionResultApiClient extends BaseApiClient {
+    private static final String PATH = "/api/events/competition/results";
+
+    private static final CompetitionResultApiClient INSTANCE = new CompetitionResultApiClient();
+    public static CompetitionResultApiClient getInstance() { return INSTANCE; }
+    private CompetitionResultApiClient() {}
+
+    public List<CompetitionResultModel> findAll() {
+        return getList(PATH, new TypeReference<>() {});
+    }
+    public List<CompetitionResultModel> findByCompetition(Long competitionId) {
+        return getList(PATH + "?competitionId=" + competitionId, new TypeReference<>() {});
+    }
+    public CompetitionResultModel create(Map<String, Object> body) {
+        return post(PATH, body, CompetitionResultModel.class);
+    }
+    public CompetitionResultModel update(Long id, Map<String, Object> body) {
+        return put(PATH + id, body, CompetitionResultModel.class);
+    }
+    public void delete(Long id) { delete(PATH + id); }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/EventApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.npopov.philharmonic.client.model.EventModel;
+
+import java.util.List;
+import java.util.Map;
+
+public class EventApiClient extends BaseApiClient {
+
+    private static final EventApiClient INSTANCE = new EventApiClient();
+    public static EventApiClient getInstance() { return INSTANCE; }
+    private EventApiClient() {}
+
+    public List<EventModel> findAll() {
+        return getList("/api/events", new TypeReference<>() {});
+    }
+
+    public List<EventModel> findByVenue(Long venueId) {
+        return getList("/api/events?venueId=" + venueId, new TypeReference<>() {});
+    }
+
+    public List<EventModel> findByOrganizer(Long organizerId) {
+        return getList("/api/events?organizerId=" + organizerId, new TypeReference<>() {});
+    }
+
+    public EventModel create(Map<String, Object> body) {
+        System.out.println("Sending data: /api/events " + body);
+        return post("/api/events", body, EventModel.class);
+    }
+
+    public EventModel update(Long id, Map<String, Object> body) {
+        System.out.println("Sending data /api/events/: " + body);
+        return put("/api/events/" + id, body, EventModel.class);
+    }
+
+    public void delete(Long id) {
+        delete("/api/events/" + id);
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/GenreApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.npopov.philharmonic.client.model.GenreModel;
+
+import java.util.List;
+import java.util.Map;
+
+public class GenreApiClient extends BaseApiClient {
+
+    private static final GenreApiClient INSTANCE = new GenreApiClient();
+    public static GenreApiClient getInstance() { return INSTANCE; }
+    private GenreApiClient() {}
+
+    public List<GenreModel> findAll() {
+        return getList("/api/genres", new TypeReference<>() {});
+    }
+
+    public GenreModel create(Map<String, Object> body) {
+        return post("/api/genres", body, GenreModel.class);
+    }
+
+    public GenreModel update(Long id, Map<String, Object> body) {
+        return put("/api/genres/" + id, body, GenreModel.class);
+    }
+
+    public void delete(Long id) {
+        delete("/api/genres/" + id);
+    }
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/HttpClientFactory.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.npopov.philharmonic.client.util.AppConfig;
+
+import java.net.http.HttpClient;
+import java.time.Duration;
+
+/**
+ * Provides a single shared {@link HttpClient} instance.
+ */
+public final class HttpClientFactory {
+
+    private static final HttpClient CLIENT = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofSeconds(AppConfig.CONNECT_TIMEOUT_SECONDS))
+            .build();
+
+    private HttpClientFactory() {}
+
+    public static HttpClient get() {
+        return CLIENT;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/ImpresarioApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.npopov.philharmonic.client.model.ImpresarioModel;
+import java.util.List;
+import java.util.Map;
+
+public class ImpresarioApiClient extends BaseApiClient {
+    private static final ImpresarioApiClient INSTANCE = new ImpresarioApiClient();
+    public static ImpresarioApiClient getInstance() { return INSTANCE; }
+    private ImpresarioApiClient() {}
+
+    public List<ImpresarioModel> findAll() {
+        return getList("/api/impresarios", new TypeReference<>() {});
+    }
+    public ImpresarioModel create(Map<String, Object> body) {
+        return post("/api/impresarios", body, ImpresarioModel.class);
+    }
+    public ImpresarioModel update(Long id, Map<String, Object> body) {
+        return put("/api/impresarios/" + id, body, ImpresarioModel.class);
+    }
+    public void delete(Long id) { delete("/api/impresarios/" + id); }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/OrganizerApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.npopov.philharmonic.client.model.OrganizerModel;
+import java.util.List;
+import java.util.Map;
+
+public class OrganizerApiClient extends BaseApiClient {
+    private static final OrganizerApiClient INSTANCE = new OrganizerApiClient();
+    public static OrganizerApiClient getInstance() { return INSTANCE; }
+    private OrganizerApiClient() {}
+
+    public List<OrganizerModel> findAll() {
+        return getList("/api/organizers", new TypeReference<>() {});
+    }
+    public OrganizerModel create(Map<String, Object> body) {
+        return post("/api/organizers", body, OrganizerModel.class);
+    }
+    public OrganizerModel update(Long id, Map<String, Object> body) {
+        return put("/api/organizers/" + id, body, OrganizerModel.class);
+    }
+    public void delete(Long id) { delete("/api/organizers/" + id); }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/api/VenueApiClient.java =====
+package com.npopov.philharmonic.client.api;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.npopov.philharmonic.client.model.VenueModel;
+
+import java.util.List;
+import java.util.Map;
+
+public class VenueApiClient extends BaseApiClient {
+
+    private static final VenueApiClient INSTANCE = new VenueApiClient();
+    public static VenueApiClient getInstance() { return INSTANCE; }
+    private VenueApiClient() {}
+
+    public List<VenueModel> findAll() {
+        return getList("/api/venues", new TypeReference<>() {});
+    }
+
+    public List<VenueModel> findByType(String type) {
+        return getList("/api/venues?type=" + type, new TypeReference<>() {});
+    }
+
+    public VenueModel create(Map<String, Object> body) {
+        System.out.println("Sending data /api/venues: " + body);
+        return post("/api/venues", body, VenueModel.class);
+    }
+
+    public VenueModel update(Long id, Map<String, Object> body) {
+        System.out.println("Sending data /api/venues: " + body);
+        return put("/api/venues/" + id, body, VenueModel.class);
+    }
+
+    public void delete(Long id) {
+        delete("/api/venues/" + id);
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/ArtistModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ArtistModel {
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String stageName;
+    private String contactInfo;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    public ArtistModel() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getStageName() { return stageName; }
+    public void setStageName(String stageName) { this.stageName = stageName; }
+    public String getContactInfo() { return contactInfo; }
+    public void setContactInfo(String contactInfo) { this.contactInfo = contactInfo; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getFullName() {
+        String fn = firstName != null ? firstName : "";
+        String ln = lastName  != null ? " " + lastName : "";
+        return (fn + ln).trim();
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/CompetitionModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CompetitionModel {
+    private Long id;
+    private String title;
+    private final String eventType = "COMPETITION";
+    private Long venueId;
+    private String venueName;
+    private Long organizerId;
+    private String organizerName;
+    private LocalDateTime startDatetime;
+    private LocalDateTime endDatetime;
+    private String description;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String competitionType;
+    private String rules;
+    private String juryInfo;
+
+    public CompetitionModel() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public Long getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(Long venueId) {
+        this.venueId = venueId;
+    }
+
+    public String getVenueName() {
+        return venueName;
+    }
+
+    public void setVenueName(String venueName) {
+        this.venueName = venueName;
+    }
+
+    public Long getOrganizerId() {
+        return organizerId;
+    }
+
+    public void setOrganizerId(Long organizerId) {
+        this.organizerId = organizerId;
+    }
+
+    public String getOrganizerName() {
+        return organizerName;
+    }
+
+    public void setOrganizerName(String organizerName) {
+        this.organizerName = organizerName;
+    }
+
+    public LocalDateTime getStartDatetime() {
+        return startDatetime;
+    }
+
+    public void setStartDatetime(LocalDateTime startDatetime) {
+        this.startDatetime = startDatetime;
+    }
+
+    public LocalDateTime getEndDatetime() {
+        return endDatetime;
+    }
+
+    public void setEndDatetime(LocalDateTime endDatetime) {
+        this.endDatetime = endDatetime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getCompetitionType() {
+        return competitionType;
+    }
+
+    public void setCompetitionType(String competitionType) {
+        this.competitionType = competitionType;
+    }
+
+    public String getRules() {
+        return rules;
+    }
+
+    public void setRules(String rules) {
+        this.rules = rules;
+    }
+
+    public String getJuryInfo() {
+        return juryInfo;
+    }
+
+    public void setJuryInfo(String juryInfo) {
+        this.juryInfo = juryInfo;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/CompetitionResultModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CompetitionResultModel {
+    private Long id;
+    private Long competitionId;
+    private Long artistId;
+    private String artistName;
+    private Integer place;
+    private String award;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    public CompetitionResultModel() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public Long getCompetitionId() { return competitionId; }
+    public void setCompetitionId(Long competitionId) { this.competitionId = competitionId; }
+    public Long getArtistId() { return artistId; }
+    public void setArtistId(Long artistId) { this.artistId = artistId; }
+    public String getArtistName() { return artistName; }
+    public void setArtistName(String artistName) { this.artistName = artistName; }
+    public Integer getPlace() { return place; }
+    public void setPlace(Integer place) { this.place = place; }
+    public String getAward() { return award; }
+    public void setAward(String award) { this.award = award; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/CrudPermissions.java =====
+package com.npopov.philharmonic.client.model;
+
+public enum CrudPermissions {
+    CREATE,
+    READ,
+    UPDATE,
+    DELETE
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/EventModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class EventModel {
+    private Long id;
+    private String title;
+    private String eventType;
+    private Long venueId;
+    private String venueName;
+    private Long organizerId;
+    private String organizerName;
+    private LocalDateTime startDatetime;
+    private LocalDateTime endDatetime;
+    private String description;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    // Поля для Concert
+    private String program;
+
+    // Поля для Competition
+    private String competitionType;
+    private String rules;
+    private String juryInfo;
+
+    public EventModel() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+    public String getEventType() { return eventType; }
+    public void setEventType(String eventType) { this.eventType = eventType; }
+    public Long getVenueId() { return venueId; }
+    public void setVenueId(Long venueId) { this.venueId = venueId; }
+    public String getVenueName() { return venueName; }
+    public void setVenueName(String venueName) { this.venueName = venueName; }
+    public Long getOrganizerId() { return organizerId; }
+    public void setOrganizerId(Long organizerId) { this.organizerId = organizerId; }
+    public String getOrganizerName() { return organizerName; }
+    public void setOrganizerName(String organizerName) { this.organizerName = organizerName; }
+    public LocalDateTime getStartDatetime() { return startDatetime; }
+    public void setStartDatetime(LocalDateTime startDatetime) { this.startDatetime = startDatetime; }
+    public LocalDateTime getEndDatetime() { return endDatetime; }
+    public void setEndDatetime(LocalDateTime endDatetime) { this.endDatetime = endDatetime; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getProgram() { return program; }
+    public void setProgram(String program) { this.program = program; }
+
+    public String getCompetitionType() { return competitionType; }
+    public void setCompetitionType(String competitionType) { this.competitionType = competitionType; }
+    public String getRules() { return rules; }
+    public void setRules(String rules) { this.rules = rules; }
+    public String getJuryInfo() { return juryInfo; }
+
+    public void setJuryInfo(String juryInfo) {
+        this.juryInfo = juryInfo;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/GenreModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class GenreModel {
+    private Long id;
+    private String name;
+    private String description;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    public GenreModel() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime v) { this.createdAt = v; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime v) { this.updatedAt = v; }
+
+    /** For ComboBox display */
+    @Override public String toString() { return name != null ? name : ""; }
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/ImpresarioModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ImpresarioModel {
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String organization;
+    private String contactInfo;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    public ImpresarioModel() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getOrganization() { return organization; }
+    public void setOrganization(String organization) { this.organization = organization; }
+    public String getContactInfo() { return contactInfo; }
+    public void setContactInfo(String contactInfo) { this.contactInfo = contactInfo; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getFullName() {
+        String fn = firstName != null ? firstName : "";
+        String ln = lastName  != null ? " " + lastName : "";
+        return (fn + ln).trim();
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/OrganizerModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class OrganizerModel {
+    private Long id;
+    private String name;
+    private String contactInfo;
+    private String type;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    public OrganizerModel() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getContactInfo() { return contactInfo; }
+    public void setContactInfo(String contactInfo) { this.contactInfo = contactInfo; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/RoleModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+public class RoleModel {
+    Long id;
+    String name;
+    String description;
+    Set<CrudPermissions> permissions;
+
+    public RoleModel(Long id, String name, String description, Set<CrudPermissions> permissions) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.permissions = permissions != null ? permissions : new HashSet<>();
+    }
+
+    public RoleModel() {
+        this.permissions = new HashSet<>();
+    }
+
+    @Override
+    public String toString() {
+        return name != null ? name : "";
+    }
+
+    public Set<CrudPermissions> getPermissions() { return permissions; }
+    public void setPermissions(Set<CrudPermissions> permissions) { this.permissions = permissions; }
+
+    public boolean hasPermission(CrudPermissions permission) {
+        return permissions != null && permissions.contains(permission);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getPermission(CrudPermissions permission) {
+        return permissions.add(permission);
+    }
+
+    public void setPermission(CrudPermissions permission) {
+        permissions.add(permission);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/UserModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.Set;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserModel {
+    private Long id;
+    private String username;
+    private String password;
+    private String email;
+    private Set<RoleModel> roles;
+    private Boolean enabled = true;
+
+    public UserModel(Long id, String username, String password, String email, Set<RoleModel> roles, Boolean enabled) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+        this.enabled = enabled;
+    }
+
+    public UserModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<RoleModel> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleModel> roles) {
+        this.roles = roles;
+    }
+
+    public Boolean getPermission(CrudPermissions permission) {
+        for (RoleModel role : this.roles) {
+            if (role.getPermission(permission)) return true;
+        }
+        return false;
+    }
+
+    public Boolean isEnabled() {
+        return enabled;
+    }
+
+    public Boolean getEnabled() {return enabled;}
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/model/VenueModel.java =====
+package com.npopov.philharmonic.client.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class VenueModel {
+    private Long id;
+    private String name;
+    private String venueType;
+    private String address;
+    private String city;
+    private String description;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    // Поля для Theatre
+    private Integer capacity;
+    private Integer stageWidthMm;
+    private Integer stageDepthMm;
+
+    // Поля для Cinema
+    private Integer screenWidthMm;
+    private Integer screenHeightMm;
+    private Integer screenDiagonalMm;
+    private String  screenAspectRatio;
+
+    // Поля для ConcertVenue
+    private String  stageType;
+    private Boolean hasSoundSystem;
+
+    // Поля для CulturalCentre
+    private Integer communityRoomsCount;
+
+    // Поля для VarietyStage
+    private String  genreFocus;
+
+    public VenueModel() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getVenueType() { return venueType; }
+    public void setVenueType(String venueType) { this.venueType = venueType; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+    public String getCity() { return city; }
+    public void setCity(String city) { this.city = city; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public Integer getCapacity() { return capacity; }
+    public void setCapacity(Integer capacity) { this.capacity = capacity; }
+    public Integer getStageWidthMm() { return stageWidthMm; }
+
+    public void setStageWidthMm(Integer stageWidthMm) {
+        this.stageWidthMm = stageWidthMm;
+    }
+
+    public Integer getStageDepthMm() {
+        return stageDepthMm;
+    }
+
+    public void setStageDepthMm(Integer stageDepthMm) {
+        this.stageDepthMm = stageDepthMm;
+    }
+
+    public Integer getScreenWidthMm() {
+        return screenWidthMm;
+    }
+
+    public void setScreenWidthMm(Integer screenWidthMm) {
+        this.screenWidthMm = screenWidthMm;
+    }
+
+    public Integer getScreenHeightMm() {
+        return screenHeightMm;
+    }
+
+    public void setScreenHeightMm(Integer screenHeightMm) {
+        this.screenHeightMm = screenHeightMm;
+    }
+
+    public Integer getScreenDiagonalMm() {
+        return screenDiagonalMm;
+    }
+
+    public void setScreenDiagonalMm(Integer screenDiagonalMm) {
+        this.screenDiagonalMm = screenDiagonalMm;
+    }
+
+    public String getScreenAspectRatio() {
+        return screenAspectRatio;
+    }
+
+    public void setScreenAspectRatio(String screenAspectRatio) {
+        this.screenAspectRatio = screenAspectRatio;
+    }
+
+    public String getStageType() {
+        return stageType;
+    }
+
+    public void setStageType(String stageType) {
+        this.stageType = stageType;
+    }
+
+    public Boolean getHasSoundSystem() {
+        return hasSoundSystem;
+    }
+
+    public void setHasSoundSystem(Boolean hasSoundSystem) {
+        this.hasSoundSystem = hasSoundSystem;
+    }
+
+    public Integer getCommunityRoomsCount() {
+        return communityRoomsCount;
+    }
+
+    public void setCommunityRoomsCount(Integer communityRoomsCount) {
+        this.communityRoomsCount = communityRoomsCount;
+    }
+
+    public String getGenreFocus() {
+        return genreFocus;
+    }
+
+    public void setGenreFocus(String genreFocus) {
+        this.genreFocus = genreFocus;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/session/SessionManager.java =====
+package com.npopov.philharmonic.client.session;
+
+import java.util.Set;
+
+/**
+ * Singleton that holds the active session after login.
+ * Stores the JWT token and decoded user roles for role-based UI.
+ */
+public final class SessionManager {
+
+    private static final SessionManager INSTANCE = new SessionManager();
+
+    private String token;
+    private String username;
+    private Set<String> roles;
+
+    private SessionManager() {}
+
+    public static SessionManager getInstance() {
+        return INSTANCE;
+    }
+
+    public void login(String token, String username, Set<String> roles) {
+        this.token    = token;
+        this.username = username;
+        this.roles    = Set.copyOf(roles);
+    }
+
+    public void logout() {
+        this.token    = null;
+        this.username = null;
+        this.roles    = null;
+    }
+
+    public boolean isLoggedIn() {
+        return token != null;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public Set<String> getRoles() {
+        return roles != null ? roles : Set.of();
+    }
+
+    /** True if user has ADMIN or SUPERADMIN role — may create/edit records. */
+    public boolean isAdmin() {
+        return roles != null &&
+               (roles.contains("ADMIN") || roles.contains("SUPERADMIN"));
+    }
+
+    /** True only for SUPERADMIN — may delete records. */
+    public boolean isSuperAdmin() {
+        return roles != null && roles.contains("SUPERADMIN");
+    }
+
+    /** Authorization header value, ready to pass in HTTP requests. */
+    public String bearerHeader() {
+        return "Bearer " + token;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/auth/LoginController.java =====
+package com.npopov.philharmonic.client.ui.auth;
+
+import com.npopov.philharmonic.client.api.ApiException;
+import com.npopov.philharmonic.client.api.AuthApiClient;
+import com.npopov.philharmonic.client.session.SessionManager;
+import com.npopov.philharmonic.client.util.AppConfig;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+/**
+ * Controller for login.fxml.
+ * Runs the HTTP login request on a background thread to keep the UI responsive.
+ */
+public class LoginController {
+
+    @FXML private TextField     usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private Button        loginButton;
+    @FXML private Label         errorLabel;
+    @FXML private VBox          formBox;
+    @FXML private ProgressIndicator spinner;
+    @FXML private Label         footerLabel;
+
+    @FXML
+    public void initialize() {
+        errorLabel.setVisible(false);
+        spinner.setVisible(false);
+
+        // Server info
+        footerLabel.setText("Server: " + AppConfig.BASE_URL);
+
+        // Allow login with Enter key from password field
+        passwordField.setOnAction(e -> handleLogin());
+        usernameField.setOnAction(e -> passwordField.requestFocus());
+
+        // Fade-in on open
+        formBox.setOpacity(0);
+        FadeTransition ft = new FadeTransition(Duration.millis(400), formBox);
+        ft.setFromValue(0);
+        ft.setToValue(1);
+        ft.play();
+
+
+    }
+
+    @FXML
+    private void handleLogin() {
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            showError("Введите логин и пароль");
+            return;
+        }
+
+        setLoading(true);
+
+        Task<AuthApiClient.LoginResult> task = new Task<>() {
+            @Override
+            protected AuthApiClient.LoginResult call() {
+                return AuthApiClient.getInstance().login(username, password);
+            }
+        };
+
+        task.setOnSucceeded(e -> Platform.runLater(() -> {
+            AuthApiClient.LoginResult result = task.getValue();
+            SessionManager.getInstance().login(
+                    result.getToken(),
+                    username,
+                    result.getRolesAsSet()
+            );
+            navigateToMain();
+        }));
+
+        task.setOnFailed(e -> Platform.runLater(() -> {
+            setLoading(false);
+            Throwable ex = task.getException();
+            switch (ex) {
+                case ApiException apiEx when apiEx.isUnauthorized() -> {
+                    showError("Неверный логин или пароль");
+                }
+                case ApiException apiEx when apiEx.getStatusCode() == 0 -> {
+                    showError("Сервер недоступен. Проверьте подключение.");
+                }
+                default -> {
+                    showError("Ошибка: " + ex.getMessage());
+                }
+            }
+            shakeForm();
+        }));
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    private void navigateToMain() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/fxml/main.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Scene scene = new Scene(root, AppConfig.MAIN_WIDTH, AppConfig.MAIN_HEIGHT);
+            scene.getStylesheets().add(
+                    getClass().getResource("/css/app.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("Филармония — " + SessionManager.getInstance().getUsername());
+            stage.centerOnScreen();
+        } catch (Exception ex) {
+            showError("Не удалось открыть главное окно: " + ex.getMessage());
+        }
+    }
+
+    private void setLoading(boolean loading) {
+        loginButton.setDisable(loading);
+        usernameField.setDisable(loading);
+        passwordField.setDisable(loading);
+        spinner.setVisible(loading);
+        if (loading) errorLabel.setVisible(false);
+    }
+
+    private void showError(String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
+    }
+
+    private void shakeForm() {
+        TranslateTransition shake = new TranslateTransition(Duration.millis(60), formBox);
+        shake.setFromX(0);
+        shake.setByX(10);
+        shake.setCycleCount(6);
+        shake.setAutoReverse(true);
+        shake.play();
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/components/BaseTabController.java =====
+package com.npopov.philharmonic.client.ui.components;
+
+import com.npopov.philharmonic.client.session.SessionManager;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+/**
+ * Base controller for all data-table tabs.
+ *
+ * Subclasses implement:
+ *  - buildColumns()      — add columns to tableView
+ *  - loadData()          — return List<T> from API (runs on background thread)
+ *  - buildFilter()       — return Predicate<T> based on current search text
+ *  - showCreateDialog()  — open dialog for creating a new record
+ *  - showEditDialog(T)   — open dialog to edit the selected record
+ *  - deleteSelected(T)   — call API to delete the record
+ */
+public abstract class BaseTabController<T> {
+
+    @FXML protected TableView<T>  tableView;
+    @FXML protected TextField     searchField;
+    @FXML protected Button        btnRefresh;
+    @FXML protected Button        btnCreate;
+    @FXML protected Button        btnEdit;
+    @FXML protected Button        btnDelete;
+    @FXML protected Label         statusLabel;
+    @FXML protected HBox          filterBar;     // subclasses may add filter controls here
+    @FXML protected ProgressIndicator loadingSpinner;
+
+    protected final ObservableList<T> masterData    = FXCollections.observableArrayList();
+    protected FilteredList<T>         filteredData;
+    protected SortedList<T>           sortedData;
+
+    @FXML
+    public void initialize() {
+        buildColumns();
+        setupTableBinding();
+        setupSearch();
+        setupButtonStates();
+        applyRolePermissions();
+        refresh();
+    }
+
+    // ── Abstract API ─────────────────────────────────────────────────────────
+
+    protected abstract void     buildColumns();
+    protected abstract List<T>  loadData();
+    protected abstract Predicate<T> buildFilter(String searchText);
+    protected abstract void     showCreateDialog();
+    protected abstract void     showEditDialog(T item);
+    protected abstract void     deleteSelected(T item);
+
+    // ── Wiring ───────────────────────────────────────────────────────────────
+
+    private void setupTableBinding() {
+        filteredData = new FilteredList<>(masterData, p -> true);
+        sortedData   = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedData);
+        tableView.setPlaceholder(new Label("Нет данных"));
+    }
+
+    private void setupSearch() {
+        searchField.textProperty().addListener((obs, oldVal, newVal) ->
+                filteredData.setPredicate(buildFilter(newVal == null ? "" : newVal.toLowerCase()))
+        );
+    }
+
+    private void setupButtonStates() {
+        // Edit and delete only active when something selected
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> {
+            btnEdit.setDisable(n == null);
+            btnDelete.setDisable(n == null);
+        });
+        btnEdit.setDisable(true);
+        btnDelete.setDisable(true);
+
+        // Double-click to edit
+        tableView.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                T selected = tableView.getSelectionModel().getSelectedItem();
+                if (selected != null) showEditDialog(selected);
+            }
+        });
+    }
+
+    private void applyRolePermissions() {
+        SessionManager session = SessionManager.getInstance();
+        btnCreate.setVisible(session.isAdmin());
+        btnEdit.setVisible(session.isAdmin());
+        btnDelete.setVisible(session.isSuperAdmin());
+    }
+
+    // ── Actions ──────────────────────────────────────────────────────────────
+
+    @FXML
+    public void refresh() {
+        setLoading(true);
+        setStatus("Загрузка...");
+
+        Task<List<T>> task = new Task<>() {
+            @Override protected List<T> call() { return loadData(); }
+        };
+
+        task.setOnSucceeded(e -> Platform.runLater(() -> {
+            masterData.setAll(task.getValue());
+            setLoading(false);
+            setStatus("Записей: " + masterData.size());
+        }));
+
+        task.setOnFailed(e -> Platform.runLater(() -> {
+            setLoading(false);
+            setStatus("Ошибка загрузки: " + task.getException().getMessage());
+        }));
+
+        Thread t = new Thread(task);
+        t.setDaemon(true);
+        t.start();
+    }
+
+    @FXML
+    public void handleCreate() { showCreateDialog(); }
+
+    @FXML
+    public void handleEdit() {
+        T selected = tableView.getSelectionModel().getSelectedItem();
+        if (selected != null) showEditDialog(selected);
+    }
+
+    @FXML
+    public void handleDelete() {
+        T selected = tableView.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "Удалить выбранную запись?", ButtonType.YES, ButtonType.NO);
+        confirm.setTitle("Подтверждение удаления");
+        confirm.setHeaderText(null);
+        confirm.showAndWait().ifPresent(btn -> {
+            if (btn == ButtonType.YES) {
+                try {
+                    deleteSelected(selected);
+                    refresh();
+                } catch (Exception ex) {
+                    showError("Ошибка удаления: " + ex.getMessage());
+                }
+            }
+        });
+    }
+
+    // ── Utilities for subclasses ─────────────────────────────────────────────
+
+    protected void setStatus(String msg) {
+        Platform.runLater(() -> statusLabel.setText(msg));
+    }
+
+    protected void setLoading(boolean loading) {
+        loadingSpinner.setVisible(loading);
+        btnRefresh.setDisable(loading);
+    }
+
+    protected void showError(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
+
+    /** Helper: null-safe string for table cells */
+    protected static String str(Object o) {
+        return o == null ? "" : o.toString();
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/dialog/EventDialog.java =====
+package com.npopov.philharmonic.client.ui.dialog;
+
+import com.npopov.philharmonic.client.api.OrganizerApiClient;
+import com.npopov.philharmonic.client.api.VenueApiClient;
+import com.npopov.philharmonic.client.model.EventModel;
+import com.npopov.philharmonic.client.model.OrganizerModel;
+import com.npopov.philharmonic.client.model.VenueModel;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.StringConverter;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class EventDialog extends Dialog<Map<String, Object>> {
+
+    private static final DateTimeFormatter ISO = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+    private final TextField titleField;
+    private final ComboBox<String> eventTypeCombo;
+    private final ComboBox<VenueModel> venueCombo;
+    private final ComboBox<OrganizerModel> organizerCombo;
+    private final TextArea descriptionArea;
+
+    private final DatePicker startDatePicker;
+    private final Spinner<Integer> startHourSpinner;
+    private final Spinner<Integer> startMinuteSpinner;
+
+    private final DatePicker endDatePicker;
+    private final Spinner<Integer> endHourSpinner;
+    private final Spinner<Integer> endMinuteSpinner;
+
+    private final VBox dynamicFieldsContainer;
+    private final GridPane concertPane;
+    private final GridPane competitionPane;
+
+    // данные для ComboBox (кешируются после загрузки)
+    private List<VenueModel> allVenues;
+    private List<OrganizerModel> allOrganizers;
+
+    public EventDialog(EventModel existing) {
+        setTitle(existing == null ? "Новое мероприятие" : "Редактировать мероприятие");
+        setHeaderText(null);
+
+        // Базовые поля
+        titleField = createTextField(existing != null ? existing.getTitle() : "");
+        eventTypeCombo = new ComboBox<>(FXCollections.observableArrayList(
+                "CONCERT", "COMPETITION", "SOLO", "FESTIVAL", "OTHER"));
+        eventTypeCombo.setPrefWidth(160);
+        if (existing != null && existing.getEventType() != null) {
+            eventTypeCombo.setValue(existing.getEventType());
+        } else {
+            eventTypeCombo.setValue("CONCERT");
+        }
+
+        // Создаём ComboBox для площадок и организаторов
+        venueCombo = new ComboBox<>();
+        organizerCombo = new ComboBox<>();
+        venueCombo.setPrefWidth(220);
+        organizerCombo.setPrefWidth(220);
+        configureComboBoxes();
+
+        descriptionArea = new TextArea();
+        descriptionArea.setPrefRowCount(3);
+        if (existing != null) descriptionArea.setText(existing.getDescription());
+
+        // Дата/время
+        startDatePicker = new DatePicker();
+        startHourSpinner = createTimeSpinner();
+        startMinuteSpinner = createTimeSpinner();
+        endDatePicker = new DatePicker();
+        endHourSpinner = createTimeSpinner();
+        endMinuteSpinner = createTimeSpinner();
+
+        if (existing != null && existing.getStartDatetime() != null) {
+            startDatePicker.setValue(existing.getStartDatetime().toLocalDate());
+            startHourSpinner.getValueFactory().setValue(existing.getStartDatetime().getHour());
+            startMinuteSpinner.getValueFactory().setValue(existing.getStartDatetime().getMinute());
+        }
+        if (existing != null && existing.getEndDatetime() != null) {
+            endDatePicker.setValue(existing.getEndDatetime().toLocalDate());
+            endHourSpinner.getValueFactory().setValue(existing.getEndDatetime().getHour());
+            endMinuteSpinner.getValueFactory().setValue(existing.getEndDatetime().getMinute());
+        }
+
+        // Панели дополнительных полей
+        concertPane = createConcertPane(existing);
+        competitionPane = createCompetitionPane(existing);
+        dynamicFieldsContainer = new VBox(8);
+
+        // Основной layout
+        GridPane baseGrid = new GridPane();
+        baseGrid.setHgap(10);
+        baseGrid.setVgap(8);
+        baseGrid.setPadding(new Insets(16));
+        baseGrid.addRow(0, label("Название *"), titleField);
+        baseGrid.addRow(1, label("Тип"), eventTypeCombo);
+        baseGrid.addRow(2, label("Площадка *"), venueCombo);
+        baseGrid.addRow(3, label("Организатор"), organizerCombo);
+
+        HBox startBox = new HBox(6, startDatePicker, startHourSpinner, new Label(":"), startMinuteSpinner);
+        baseGrid.addRow(4, label("Начало *"), startBox);
+        HBox endBox = new HBox(6, endDatePicker, endHourSpinner, new Label(":"), endMinuteSpinner);
+        baseGrid.addRow(5, label("Конец"), endBox);
+        baseGrid.addRow(6, label("Описание"), descriptionArea);
+        baseGrid.addRow(7, label("Детали"), dynamicFieldsContainer);
+
+        getDialogPane().setContent(baseGrid);
+        getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        getDialogPane().getStylesheets().add(getClass().getResource("/css/app.css").toExternalForm());
+
+        setOnShowing(ev -> {
+            Stage stage = (Stage) getDialogPane().getScene().getWindow();
+            stage.setResizable(true);
+            stage.setMinWidth(400);
+            stage.setMinHeight(300);
+        });
+
+        // Загружаем данные для ComboBox асинхронно
+        loadVenuesAsync(existing);
+        loadOrganizersAsync(existing);
+
+        // Логика переключения дополнительных полей
+        eventTypeCombo.valueProperty().addListener((obs, old, newType) -> {
+            updateDynamicFields(newType);
+            getDialogPane().requestLayout();
+            Stage stage = (Stage) getDialogPane().getScene().getWindow();
+            if (stage != null) {
+                stage.sizeToScene();
+            }
+        });
+        updateDynamicFields(eventTypeCombo.getValue());
+
+        // Валидация
+        Node okButton = getDialogPane().lookupButton(ButtonType.OK);
+        Runnable validate = () -> {
+            boolean baseOk = !titleField.getText().trim().isEmpty()
+                    && venueCombo.getSelectionModel().getSelectedItem() != null;
+            LocalDateTime start = toLocalDateTime(startDatePicker, startHourSpinner, startMinuteSpinner);
+            if (start == null) baseOk = false;
+            else if (start.isBefore(LocalDateTime.now())) baseOk = false;
+            LocalDateTime end = toLocalDateTime(endDatePicker, endHourSpinner, endMinuteSpinner);
+            if (end != null && !end.isAfter(start)) baseOk = false;
+            okButton.setDisable(!baseOk);
+        };
+        titleField.textProperty().addListener((o,ov,nv) -> validate.run());
+        venueCombo.getSelectionModel().selectedItemProperty().addListener((o,ov,nv) -> validate.run());
+        startDatePicker.valueProperty().addListener((o,ov,nv) -> validate.run());
+        startHourSpinner.valueProperty().addListener((o,ov,nv) -> validate.run());
+        startMinuteSpinner.valueProperty().addListener((o,ov,nv) -> validate.run());
+        endDatePicker.valueProperty().addListener((o,ov,nv) -> validate.run());
+        endHourSpinner.valueProperty().addListener((o,ov,nv) -> validate.run());
+        endMinuteSpinner.valueProperty().addListener((o,ov,nv) -> validate.run());
+        validate.run();
+
+        setResultConverter(btn -> {
+            if (btn != ButtonType.OK) return null;
+            Map<String, Object> data = new HashMap<>();
+            data.put("title", titleField.getText().trim());
+            data.put("eventType", eventTypeCombo.getValue());
+
+            VenueModel selectedVenue = venueCombo.getSelectionModel().getSelectedItem();
+            if (selectedVenue == null) return null;
+            data.put("venueId", selectedVenue.getId());
+
+            OrganizerModel selectedOrganizer = organizerCombo.getSelectionModel().getSelectedItem();
+            data.put("organizerId", selectedOrganizer != null ? selectedOrganizer.getId() : null);
+
+            LocalDateTime start = toLocalDateTime(startDatePicker, startHourSpinner, startMinuteSpinner);
+            if (start != null) data.put("startDatetime", start.format(ISO));
+            LocalDateTime end = toLocalDateTime(endDatePicker, endHourSpinner, endMinuteSpinner);
+            if (end != null) data.put("endDatetime", end.format(ISO));
+            data.put("description", descriptionArea.getText().trim());
+
+            String type = eventTypeCombo.getValue();
+            switch (type) {
+                case "CONCERT" -> data.put("program", getTextFromField(concertPane, "program"));
+                case "COMPETITION" -> {
+                    data.put("competitionType", getTextFromField(competitionPane, "competitionType"));
+                    data.put("rules", getTextFromField(competitionPane, "rules"));
+                    data.put("juryInfo", getTextFromField(competitionPane, "juryInfo"));
+                }
+                // SOLO, FESTIVAL, OTHER – без дополнительных полей
+            }
+            return data;
+        });
+    }
+
+    private void configureComboBoxes() {
+        venueCombo.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(VenueModel v) {
+                return v == null ? "" : v.getName() + " (id=" + v.getId() + ")";
+            }
+            @Override
+            public VenueModel fromString(String s) { return null; }
+        });
+        organizerCombo.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(OrganizerModel o) {
+                return o == null ? "" : o.getName() + " (id=" + o.getId() + ")";
+            }
+            @Override
+            public OrganizerModel fromString(String s) { return null; }
+        });
+        // начальное состояние: загружается
+        venueCombo.setDisable(true);
+        organizerCombo.setDisable(true);
+    }
+
+    private void loadVenuesAsync(EventModel existing) {
+        Task<List<VenueModel>> task = new Task<>() {
+            @Override
+            protected List<VenueModel> call() {
+                return VenueApiClient.getInstance().findAll();
+            }
+        };
+        task.setOnSucceeded(e -> {
+            allVenues = task.getValue();
+            Platform.runLater(() -> {
+                venueCombo.setItems(FXCollections.observableArrayList(allVenues));
+                venueCombo.setDisable(false);
+                if (existing != null && existing.getVenueId() != null) {
+                    VenueModel preselected = allVenues.stream()
+                            .filter(v -> v.getId().equals(existing.getVenueId()))
+                            .findFirst()
+                            .orElse(null);
+                    venueCombo.getSelectionModel().select(preselected);
+                }
+            });
+        });
+        task.setOnFailed(e -> {
+            Platform.runLater(() -> {
+                venueCombo.setDisable(false);
+                venueCombo.setPromptText("Ошибка загрузки");
+                showError("Не удалось загрузить площадки: " + task.getException().getMessage());
+            });
+        });
+        new Thread(task).start();
+    }
+
+    private void loadOrganizersAsync(EventModel existing) {
+        Task<List<OrganizerModel>> task = new Task<>() {
+            @Override
+            protected List<OrganizerModel> call() {
+                return OrganizerApiClient.getInstance().findAll();
+            }
+        };
+        task.setOnSucceeded(e -> {
+            allOrganizers = task.getValue();
+            Platform.runLater(() -> {
+                organizerCombo.setItems(FXCollections.observableArrayList(allOrganizers));
+                organizerCombo.setDisable(false);
+                if (existing != null && existing.getOrganizerId() != null) {
+                    OrganizerModel preselected = allOrganizers.stream()
+                            .filter(o -> o.getId().equals(existing.getOrganizerId()))
+                            .findFirst()
+                            .orElse(null);
+                    organizerCombo.getSelectionModel().select(preselected);
+                }
+            });
+        });
+        task.setOnFailed(e -> {
+            Platform.runLater(() -> {
+                organizerCombo.setDisable(false);
+                organizerCombo.setPromptText("Ошибка загрузки");
+                showError("Не удалось загрузить организаторов: " + task.getException().getMessage());
+            });
+        });
+        new Thread(task).start();
+    }
+
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
+
+    private GridPane createConcertPane(EventModel ex) {
+        GridPane gp = new GridPane();
+        gp.setHgap(8); gp.setVgap(6);
+        TextField programField = createTextField(ex != null ? ex.getProgram() : null);
+        gp.addRow(0, label("Программа"), programField);
+        programField.setId("program");
+        return gp;
+    }
+
+    private GridPane createCompetitionPane(EventModel ex) {
+        GridPane gp = new GridPane();
+        gp.setHgap(8); gp.setVgap(6);
+        TextField typeField = createTextField(ex != null ? ex.getCompetitionType() : null);
+        TextArea rulesArea = new TextArea();
+        rulesArea.setPrefRowCount(2);
+        if (ex != null) rulesArea.setText(ex.getRules());
+        TextArea juryArea = new TextArea();
+        juryArea.setPrefRowCount(2);
+        if (ex != null) juryArea.setText(ex.getJuryInfo());
+
+        gp.addRow(0, label("Тип конкурса"), typeField);
+        gp.addRow(1, label("Правила"), rulesArea);
+        gp.addRow(2, label("Жюри"), juryArea);
+        typeField.setId("competitionType");
+        rulesArea.setId("rules");
+        juryArea.setId("juryInfo");
+        return gp;
+    }
+
+    private void updateDynamicFields(String type) {
+        dynamicFieldsContainer.getChildren().clear();
+        switch (type) {
+            case "CONCERT" -> dynamicFieldsContainer.getChildren().add(concertPane);
+            case "COMPETITION" -> dynamicFieldsContainer.getChildren().add(competitionPane);
+            default -> { /* без дополнительных полей */ }
+        }
+    }
+
+    private TextField createTextField(String val) {
+        TextField tf = new TextField(val == null ? "" : val);
+        tf.getStyleClass().add("text-field-lg");
+        return tf;
+    }
+
+    private Spinner<Integer> createTimeSpinner() {
+        Spinner<Integer> spinner = new Spinner<>();
+        SpinnerValueFactory.IntegerSpinnerValueFactory vf =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0);
+        vf.setConverter(new StringConverter<>() {
+            @Override public String toString(Integer value) {
+                return String.format("%02d", value == null ? 0 : value);
+            }
+            @Override public Integer fromString(String s) {
+                try { return Integer.parseInt(s); } catch (Exception e) { return vf.getValue(); }
+            }
+        });
+        spinner.setValueFactory(vf);
+        spinner.setEditable(true);
+        spinner.setPrefWidth(60);
+        return spinner;
+    }
+
+    private LocalDateTime toLocalDateTime(DatePicker dp, Spinner<Integer> h, Spinner<Integer> m) {
+        LocalDate d = dp.getValue();
+        if (d == null) return null;
+        return LocalDateTime.of(d, LocalTime.of(h.getValue(), m.getValue()));
+    }
+
+    private Long parseLong(String s) {
+        try { return Long.parseLong(s.trim()); } catch (Exception e) { return null; }
+    }
+
+    private Label label(String text) {
+        Label l = new Label(text);
+        l.getStyleClass().add("field-label");
+        return l;
+    }
+
+    private String getTextFromField(GridPane gp, String fieldId) {
+        Node node = gp.lookup("#" + fieldId);
+        if (node instanceof TextField tf) {
+            String val = tf.getText().trim();
+            return val.isEmpty() ? null : val;
+        } else if (node instanceof TextArea ta) {
+            String val = ta.getText().trim();
+            return val.isEmpty() ? null : val;
+        }
+        return null;
+    }
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/main/MainController.java =====
+package com.npopov.philharmonic.client.ui.main;
+
+import com.npopov.philharmonic.client.session.SessionManager;
+import com.npopov.philharmonic.client.util.AppConfig;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class MainController {
+
+    @FXML private Label    usernameLabel;
+    @FXML private Label    roleLabel;
+    @FXML private Label    statusLabel;
+    @FXML private Label    serverLabel;
+    @FXML private TabPane  tabPane;
+
+    @FXML private StackPane eventsPane;
+    @FXML private StackPane artistsPane;
+    @FXML private StackPane venuesPane;
+    @FXML private StackPane impresariosPane;
+    @FXML private StackPane organizersPane;
+    @FXML private StackPane competitionsPane;
+    @FXML private StackPane resultsPane;
+    @FXML private StackPane genresPane;
+    @FXML private StackPane usersPane;
+    @FXML private StackPane rolesPane;
+
+    private final boolean[] loaded = new boolean[10];
+
+    @FXML
+    public void initialize() {
+        SessionManager session = SessionManager.getInstance();
+        usernameLabel.setText(session.getUsername());
+        roleLabel.setText(formatRole(session.getRoles().toString()));
+        serverLabel.setText("Сервер: " + AppConfig.BASE_URL);
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldTab, newTab) -> loadTabIfNeeded(newTab));
+
+        loadTabIfNeeded(tabPane.getSelectionModel().getSelectedItem());
+
+        if (!SessionManager.getInstance().isSuperAdmin()) {
+            tabPane.getTabs().removeIf(tab -> tab.getText().equals("Пользователи") || tab.getText().equals("Роли"));
+        }
+    }
+
+    private void loadTabIfNeeded(Tab tab) {
+        if (tab == null) return;
+        int idx = tabPane.getTabs().indexOf(tab);
+        if (idx < 0 || loaded[idx]) return;
+        loaded[idx] = true;
+
+        String fxmlPath = switch (idx) {
+            case 0 -> "/fxml/tabs/events.fxml";
+            case 1 -> "/fxml/tabs/artists.fxml";
+            case 2 -> "/fxml/tabs/venues.fxml";
+            case 3 -> "/fxml/tabs/impresarios.fxml";
+            case 4 -> "/fxml/tabs/organizers.fxml";
+            case 5 -> "/fxml/tabs/competitions.fxml";
+            case 6 -> "/fxml/tabs/results.fxml";
+            case 7 -> "/fxml/tabs/genres.fxml";
+            case 8 -> "/fxml/tabs/users.fxml";
+            case 9 -> "/fxml/tabs/roles.fxml";
+            default -> null;
+        };
+
+        StackPane pane = switch (idx) {
+            case 0 -> eventsPane;
+            case 1 -> artistsPane;
+            case 2 -> venuesPane;
+            case 3 -> impresariosPane;
+            case 4 -> organizersPane;
+            case 5 -> competitionsPane;
+            case 6 -> resultsPane;
+            case 7 -> genresPane;
+            case 8 -> usersPane;
+            case 9 -> rolesPane;
+            default -> null;
+        };
+
+        if (fxmlPath == null || pane == null) return;
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent content = loader.load();
+            pane.getChildren().setAll(content);
+            setStatus("Загружено: " + tab.getText());
+        } catch (Exception ex) {
+            setStatus("Ошибка загрузки вкладки: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleLogout() {
+        SessionManager.getInstance().logout();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameLabel.getScene().getWindow();
+            Scene scene = new Scene(root, AppConfig.LOGIN_WIDTH, AppConfig.LOGIN_HEIGHT);
+            scene.getStylesheets().add(getClass().getResource("/css/app.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("Филармония — Вход");
+            stage.centerOnScreen();
+        } catch (Exception ex) {
+            setStatus("Ошибка выхода: " + ex.getMessage());
+        }
+    }
+
+    public void setStatus(String message) {
+        Platform.runLater(() -> statusLabel.setText(message));
+    }
+
+    private String formatRole(String rawRoles) {
+        if (rawRoles.contains("SUPERADMIN")) return "Суперадмин";
+        if (rawRoles.contains("ADMIN"))      return "Администратор";
+        return "Пользователь";
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/ArtistsTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.ArtistApiClient;
+import com.npopov.philharmonic.client.model.ArtistModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Predicate;
+
+public class ArtistsTabController extends BaseTabController<ArtistModel> {
+
+    private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
+    @Override
+    protected void buildColumns() {
+        TableColumn<ArtistModel, Long>   colId        = col("ID",           60,  "id");
+        TableColumn<ArtistModel, String> colFirst     = col("Имя",          120, "firstName");
+        TableColumn<ArtistModel, String> colLast      = col("Фамилия",      120, "lastName");
+        TableColumn<ArtistModel, String> colStage     = col("Псевдоним",    140, "stageName");
+        TableColumn<ArtistModel, String> colContact   = col("Контакт",      160, "contactInfo");
+
+        TableColumn<ArtistModel, String> colCreated = new TableColumn<>("Создан");
+        colCreated.setPrefWidth(130);
+        colCreated.setCellValueFactory(cd ->
+                new javafx.beans.property.SimpleStringProperty(
+                        cd.getValue().getCreatedAt() != null
+                                ? cd.getValue().getCreatedAt().format(FMT) : ""));
+
+        tableView.getColumns().addAll(colId, colFirst, colLast, colStage, colContact, colCreated);
+        tableView.getSortOrder().add(colId);
+    }
+
+    @Override
+    protected List<ArtistModel> loadData() {
+        return ArtistApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<ArtistModel> buildFilter(String q) {
+        if (q == null || q.isBlank()) return p -> true;
+        return a -> str(a.getFirstName()).toLowerCase().contains(q)
+                || str(a.getLastName()).toLowerCase().contains(q)
+                || str(a.getStageName()).toLowerCase().contains(q)
+                || str(a.getContactInfo()).toLowerCase().contains(q);
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        ArtistDialog dialog = new ArtistDialog(null);
+        dialog.showAndWait().ifPresent(body -> {
+            try {
+                ArtistApiClient.getInstance().create(body);
+                refresh();
+            } catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void showEditDialog(ArtistModel item) {
+        ArtistDialog dialog = new ArtistDialog(item);
+        dialog.showAndWait().ifPresent(body -> {
+            try {
+                System.out.println(str(body));
+                ArtistApiClient.getInstance().update(item.getId(), body);
+                refresh();
+            } catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void deleteSelected(ArtistModel item) {
+        ArtistApiClient.getInstance().delete(item.getId());
+    }
+
+    // ── Column helper ────────────────────────────────────────────────────────
+    private <V> TableColumn<ArtistModel, V> col(String title, double width, String prop) {
+        TableColumn<ArtistModel, V> c = new TableColumn<>(title);
+        c.setPrefWidth(width);
+        c.setCellValueFactory(new PropertyValueFactory<>(prop));
+        return c;
+    }
+
+    // ── Inner dialog ─────────────────────────────────────────────────────────
+    private static class ArtistDialog extends Dialog<Map<String, Object>> {
+        ArtistDialog(ArtistModel existing) {
+            setTitle(existing == null ? "Новый артист" : "Редактировать артиста");
+            setHeaderText(null);
+
+            TextField firstName   = field(existing != null ? existing.getFirstName()   : "");
+            TextField lastName    = field(existing != null ? existing.getLastName()    : "");
+            TextField stageName   = field(existing != null ? existing.getStageName()   : "");
+            TextField contactInfo = field(existing != null ? existing.getContactInfo() : "");
+
+            javafx.scene.layout.GridPane grid = new javafx.scene.layout.GridPane();
+            grid.setHgap(10); grid.setVgap(8);
+            grid.addRow(0, label("Имя *"),      firstName);
+            grid.addRow(1, label("Фамилия"),    lastName);
+            grid.addRow(2, label("Псевдоним"),  stageName);
+            grid.addRow(3, label("Контакт"),    contactInfo);
+            grid.setPadding(new javafx.geometry.Insets(16));
+            firstName.setPrefWidth(220);
+
+            getDialogPane().setContent(grid);
+            getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+            getDialogPane().getStylesheets().add(
+                    getClass().getResource("/css/app.css").toExternalForm());
+
+            Button okBtn = (Button) getDialogPane().lookupButton(ButtonType.OK);
+            okBtn.setDisable(true);
+            firstName.textProperty().addListener((o, ov, nv) ->
+                    okBtn.setDisable(nv == null || nv.isBlank()));
+            if (existing != null && existing.getFirstName() != null && !existing.getFirstName().isBlank())
+                okBtn.setDisable(false);
+
+            setResultConverter(btn -> {
+                if (btn != ButtonType.OK) return null;
+                return Map.of(
+                        "firstName",   firstName.getText().trim(),
+                        "lastName",    lastName.getText().trim(),
+                        "stageName",   stageName.getText().trim(),
+                        "contactInfo", contactInfo.getText().trim()
+                );
+            });
+        }
+
+        private TextField field(String val) {
+            TextField tf = new TextField(val);
+            tf.getStyleClass().add("text-field-lg");
+            return tf;
+        }
+        private Label label(String text) {
+            Label l = new Label(text);
+            l.getStyleClass().add("field-label");
+            return l;
+        }
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/CompetitionResultsTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.CompetitionResultApiClient;
+import com.npopov.philharmonic.client.model.CompetitionResultModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+public class CompetitionResultsTabController extends BaseTabController<CompetitionResultModel> {
+
+    @Override
+    protected void buildColumns() {
+        tableView.getColumns().addAll(
+                col("ID",           60,  "id"),
+                col("Конкурс ID",  100,  "competitionId"),
+                col("Артист ID",   100,  "artistId"),
+                col("Артист",      180,  "artistName"),
+                col("Место",        80,  "place"),
+                col("Награда",     200,  "award")
+        );
+    }
+
+    @Override
+    protected List<CompetitionResultModel> loadData() {
+        return CompetitionResultApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<CompetitionResultModel> buildFilter(String q) {
+        if (q == null || q.isBlank()) return p -> true;
+        return r -> str(r.getArtistName()).toLowerCase().contains(q)
+                || str(r.getAward()).toLowerCase().contains(q)
+                || str(r.getCompetitionId()).contains(q);
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        dialog(null).showAndWait().ifPresent(body -> {
+            try { CompetitionResultApiClient.getInstance().create(body); refresh(); }
+            catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void showEditDialog(CompetitionResultModel item) {
+        dialog(item).showAndWait().ifPresent(body -> {
+            try { CompetitionResultApiClient.getInstance().update(item.getId(), body); refresh(); }
+            catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void deleteSelected(CompetitionResultModel item) {
+        CompetitionResultApiClient.getInstance().delete(item.getId());
+    }
+
+    private <V> TableColumn<CompetitionResultModel, V> col(String t, double w, String p) {
+        TableColumn<CompetitionResultModel, V> c = new TableColumn<>(t);
+        c.setPrefWidth(w); c.setCellValueFactory(new PropertyValueFactory<>(p)); return c;
+    }
+
+    private Dialog<Map<String, Object>> dialog(CompetitionResultModel ex) {
+        Dialog<Map<String, Object>> d = new Dialog<>();
+        d.setTitle(ex == null ? "Новый результат" : "Редактировать результат");
+        d.setHeaderText(null);
+        TextField compId   = field(ex != null ? str(ex.getCompetitionId()) : "");
+        TextField artistId = field(ex != null ? str(ex.getArtistId())      : "");
+        TextField place    = field(ex != null ? str(ex.getPlace())         : "");
+        TextField award    = field(ex != null ? str(ex.getAward())         : "");
+        javafx.scene.layout.GridPane g = new javafx.scene.layout.GridPane();
+        g.setHgap(10); g.setVgap(8);
+        g.addRow(0, lbl("ID конкурса *"), compId);
+        g.addRow(1, lbl("ID артиста *"),  artistId);
+        g.addRow(2, lbl("Место"),         place);
+        g.addRow(3, lbl("Награда"),       award);
+        g.setPadding(new javafx.geometry.Insets(16)); compId.setPrefWidth(220);
+        d.getDialogPane().setContent(g);
+        d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        d.getDialogPane().getStylesheets().add(getClass().getResource("/css/app.css").toExternalForm());
+        d.setResultConverter(btn -> {
+            if (btn != ButtonType.OK) return null;
+            java.util.HashMap<String, Object> m = new java.util.HashMap<>();
+            m.put("competitionId", parseLong(compId.getText()));
+            m.put("artistId",      parseLong(artistId.getText()));
+            m.put("place",         parseInt(place.getText()));
+            m.put("award",         award.getText().trim());
+            return m;
+        });
+        return d;
+    }
+
+    private static Long parseLong(String s) { try { return Long.parseLong(s.trim()); } catch (Exception e) { return null; } }
+    private static Integer parseInt(String s) { try { return Integer.parseInt(s.trim()); } catch (Exception e) { return null; } }
+    private TextField field(String v) { TextField tf = new TextField(v); tf.getStyleClass().add("text-field-lg"); return tf; }
+    private Label lbl(String t)       { Label l = new Label(t); l.getStyleClass().add("field-label"); return l; }
+    protected static String str(Object o) { return o == null ? "" : o.toString(); }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/CompetitionsTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.CompetitionApiClient;
+import com.npopov.philharmonic.client.model.CompetitionModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class CompetitionsTabController extends BaseTabController<CompetitionModel> {
+
+    private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
+    @Override
+    protected void buildColumns() {
+        TableColumn<CompetitionModel, Long> idCol = col("ID", 60, "id");
+        TableColumn<CompetitionModel, String> titleCol = col("Название", 200, "title");
+        TableColumn<CompetitionModel, String> typeCol = col("Тип конкурса", 150, "competitionType");
+        TableColumn<CompetitionModel, String> venueCol = col("Площадка", 150, "venueName");
+        TableColumn<CompetitionModel, String> startCol = col("Начало", 150, "startDatetime");
+        TableColumn<CompetitionModel, String> endCol = col("Конец", 150, "endDatetime");
+
+        // настраиваем отображение дат
+        startCol.setCellValueFactory(cd -> {
+            var date = cd.getValue().getStartDatetime();
+            return new javafx.beans.property.SimpleStringProperty(date != null ? date.format(FMT) : "");
+        });
+        endCol.setCellValueFactory(cd -> {
+            var date = cd.getValue().getEndDatetime();
+            return new javafx.beans.property.SimpleStringProperty(date != null ? date.format(FMT) : "");
+        });
+
+        tableView.getColumns().addAll(idCol, titleCol, typeCol, venueCol, startCol, endCol);
+    }
+
+    @Override
+    protected List<CompetitionModel> loadData() {
+        return CompetitionApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<CompetitionModel> buildFilter(String q) {
+        if (q == null || q.isBlank()) return c -> true;
+        String lower = q.toLowerCase();
+        return c -> str(c.getTitle()).toLowerCase().contains(lower) ||
+                str(c.getCompetitionType()).toLowerCase().contains(lower) ||
+                str(c.getVenueName()).toLowerCase().contains(lower);
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        // можно использовать EventDialog с типом COMPETITION, но проще пока заглушка
+        showError("Создание конкурсов пока не реализовано, можно через вкладку Мероприятия");
+    }
+
+    @Override
+    protected void showEditDialog(CompetitionModel item) {
+        showError("Редактирование конкурсов пока не реализовано");
+    }
+
+    @Override
+    protected void deleteSelected(CompetitionModel item) {
+        CompetitionApiClient.getInstance().delete(item.getId());
+    }
+
+    private <V> TableColumn<CompetitionModel, V> col(String title, double width, String prop) {
+        TableColumn<CompetitionModel, V> c = new TableColumn<>(title);
+        c.setPrefWidth(width);
+        c.setCellValueFactory(new PropertyValueFactory<>(prop));
+        return c;
+    }
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/EventsTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.EventApiClient;
+import com.npopov.philharmonic.client.model.EventModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import com.npopov.philharmonic.client.ui.dialog.EventDialog;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class EventsTabController extends BaseTabController<EventModel> {
+
+    @Override
+    protected void buildColumns() {
+        TableColumn<EventModel, Long> idCol = new TableColumn<>("ID");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idCol.setPrefWidth(60);
+
+        TableColumn<EventModel, String> titleCol = new TableColumn<>("Название");
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        titleCol.setPrefWidth(200);
+
+        TableColumn<EventModel, String> typeCol = new TableColumn<>("Тип");
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("eventType"));
+        typeCol.setPrefWidth(120);
+
+        TableColumn<EventModel, String> venueCol = new TableColumn<>("Площадка");
+        venueCol.setCellValueFactory(new PropertyValueFactory<>("venueName"));
+        venueCol.setPrefWidth(150);
+
+        TableColumn<EventModel, String> startCol = new TableColumn<>("Начало");
+        startCol.setCellValueFactory(new PropertyValueFactory<>("startDatetime"));
+        startCol.setPrefWidth(150);
+
+        TableColumn<EventModel, String> endCol = new TableColumn<>("Конец");
+        endCol.setCellValueFactory(new PropertyValueFactory<>("endDatetime"));
+        endCol.setPrefWidth(150);
+
+        tableView.getColumns().addAll(idCol, titleCol, typeCol, venueCol, startCol, endCol);
+    }
+
+    @Override
+    protected List<EventModel> loadData() {
+        return EventApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<EventModel> buildFilter(String searchText) {
+        return e -> {
+            if (searchText == null || searchText.isBlank()) return true;
+            String lower = searchText.toLowerCase();
+            return (e.getTitle() != null && e.getTitle().toLowerCase().contains(lower)) ||
+                    (e.getEventType() != null && e.getEventType().toLowerCase().contains(lower)) ||
+                    (e.getVenueName() != null && e.getVenueName().toLowerCase().contains(lower));
+        };
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        EventDialog dialog = new EventDialog(null);
+        dialog.showAndWait().ifPresent(body -> {
+            try {
+                EventApiClient.getInstance().create(body);
+                refresh();
+            } catch (Exception ex) {
+                showError(ex.getMessage());
+            }
+        });
+    }
+
+    @Override
+    protected void showEditDialog(EventModel item) {
+        EventDialog dialog = new EventDialog(item);
+        dialog.showAndWait().ifPresent(body -> {
+            try {
+                EventApiClient.getInstance().update(item.getId(), body);
+                refresh();
+            } catch (Exception ex) {
+                showError(ex.getMessage());
+            }
+        });
+    }
+
+    @Override
+    protected void deleteSelected(EventModel item) {
+        EventApiClient.getInstance().delete(item.getId());
+    }
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/GenresTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.GenreApiClient;
+import com.npopov.philharmonic.client.model.GenreModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.geometry.Insets;
+import javafx.scene.layout.GridPane;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+public class GenresTabController extends BaseTabController<GenreModel> {
+
+    private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
+    @Override
+    protected void buildColumns() {
+        TableColumn<GenreModel, Long>   colId   = col("ID",          60,  "id");
+        TableColumn<GenreModel, String> colName = col("Название",    220, "name");
+        TableColumn<GenreModel, String> colDesc = col("Описание",    340, "description");
+
+        TableColumn<GenreModel, String> colCreated = new TableColumn<>("Создан");
+        colCreated.setPrefWidth(130);
+        colCreated.setCellValueFactory(cd -> new SimpleStringProperty(
+                cd.getValue().getCreatedAt() != null
+                        ? cd.getValue().getCreatedAt().format(FMT) : ""));
+
+        tableView.getColumns().addAll(colId, colName, colDesc, colCreated);
+        tableView.getSortOrder().add(colName);
+    }
+
+    @Override
+    protected List<GenreModel> loadData() {
+        return GenreApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<GenreModel> buildFilter(String q) {
+        if (q == null || q.isBlank()) return p -> true;
+        return g -> str(g.getName()).toLowerCase().contains(q)
+                || str(g.getDescription()).toLowerCase().contains(q);
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        genreDialog(null).showAndWait().ifPresent(body -> {
+            try { GenreApiClient.getInstance().create(body); refresh(); }
+            catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void showEditDialog(GenreModel item) {
+        genreDialog(item).showAndWait().ifPresent(body -> {
+            try { GenreApiClient.getInstance().update(item.getId(), body); refresh(); }
+            catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void deleteSelected(GenreModel item) {
+        GenreApiClient.getInstance().delete(item.getId());
+    }
+
+    private <V> TableColumn<GenreModel, V> col(String title, double width, String prop) {
+        TableColumn<GenreModel, V> c = new TableColumn<>(title);
+        c.setPrefWidth(width);
+        c.setCellValueFactory(new PropertyValueFactory<>(prop));
+        return c;
+    }
+
+    private Dialog<Map<String, Object>> genreDialog(GenreModel ex) {
+        Dialog<Map<String, Object>> d = new Dialog<>();
+        d.setTitle(ex == null ? "Новый жанр" : "Редактировать жанр");
+        d.setHeaderText(null);
+
+        TextField name = field(ex != null ? str(ex.getName()) : "");
+        TextArea  desc = new TextArea(ex != null ? str(ex.getDescription()) : "");
+        desc.setPrefRowCount(3);
+        desc.setWrapText(true);
+        desc.getStyleClass().add("text-field-lg");
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(8);
+        grid.setPadding(new Insets(16));
+        grid.addRow(0, lbl("Название *"), name);
+        grid.addRow(1, lbl("Описание"),   desc);
+        name.setPrefWidth(280);
+        desc.setPrefWidth(280);
+
+        d.getDialogPane().setContent(grid);
+        d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        d.getDialogPane().getStylesheets().add(
+                getClass().getResource("/css/app.css").toExternalForm());
+
+        Button ok = (Button) d.getDialogPane().lookupButton(ButtonType.OK);
+        ok.setDisable(name.getText().isBlank());
+        name.textProperty().addListener((o, ov, nv) ->
+                ok.setDisable(nv == null || nv.isBlank()));
+
+        d.setResultConverter(btn -> btn != ButtonType.OK ? null : Map.of(
+                "name",        name.getText().trim(),
+                "description", desc.getText().trim()
+        ));
+        return d;
+    }
+
+    private TextField field(String v) {
+        TextField tf = new TextField(v);
+        tf.getStyleClass().add("text-field-lg");
+        return tf;
+    }
+
+    private Label lbl(String t) {
+        Label l = new Label(t);
+        l.getStyleClass().add("field-label");
+        return l;
+    }
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/ImpresariosTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.ImpresarioApiClient;
+import com.npopov.philharmonic.client.model.ImpresarioModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+public class ImpresariosTabController extends BaseTabController<ImpresarioModel> {
+
+    @Override
+    protected void buildColumns() {
+        tableView.getColumns().addAll(
+                col("ID",           60,  "id"),
+                col("Имя",         120,  "firstName"),
+                col("Фамилия",     120,  "lastName"),
+                col("Организация", 180,  "organization"),
+                col("Контакт",     180,  "contactInfo")
+        );
+    }
+
+    @Override
+    protected List<ImpresarioModel> loadData() {
+        return ImpresarioApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<ImpresarioModel> buildFilter(String q) {
+        if (q == null || q.isBlank()) return p -> true;
+        return i -> str(i.getFirstName()).toLowerCase().contains(q)
+                || str(i.getLastName()).toLowerCase().contains(q)
+                || str(i.getOrganization()).toLowerCase().contains(q)
+                || str(i.getContactInfo()).toLowerCase().contains(q);
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        dialog(null).showAndWait().ifPresent(body -> {
+            try { ImpresarioApiClient.getInstance().create(body); refresh(); }
+            catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void showEditDialog(ImpresarioModel item) {
+        dialog(item).showAndWait().ifPresent(body -> {
+            try { ImpresarioApiClient.getInstance().update(item.getId(), body); refresh(); }
+            catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void deleteSelected(ImpresarioModel item) {
+        ImpresarioApiClient.getInstance().delete(item.getId());
+    }
+
+    private <V> TableColumn<ImpresarioModel, V> col(String t, double w, String p) {
+        TableColumn<ImpresarioModel, V> c = new TableColumn<>(t);
+        c.setPrefWidth(w); c.setCellValueFactory(new PropertyValueFactory<>(p)); return c;
+    }
+
+    private Dialog<Map<String, Object>> dialog(ImpresarioModel ex) {
+        Dialog<Map<String, Object>> d = new Dialog<>();
+        d.setTitle(ex == null ? "Новый импресарио" : "Редактировать импресарио");
+        d.setHeaderText(null);
+        TextField fn  = field(ex != null ? str(ex.getFirstName())   : "");
+        TextField ln  = field(ex != null ? str(ex.getLastName())    : "");
+        TextField org = field(ex != null ? str(ex.getOrganization()): "");
+        TextField ci  = field(ex != null ? str(ex.getContactInfo()) : "");
+        javafx.scene.layout.GridPane g = new javafx.scene.layout.GridPane();
+        g.setHgap(10); g.setVgap(8);
+        g.addRow(0, lbl("Имя *"),       fn);
+        g.addRow(1, lbl("Фамилия"),     ln);
+        g.addRow(2, lbl("Организация"), org);
+        g.addRow(3, lbl("Контакт"),     ci);
+        g.setPadding(new javafx.geometry.Insets(16)); fn.setPrefWidth(220);
+        d.getDialogPane().setContent(g);
+        d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        d.getDialogPane().getStylesheets().add(getClass().getResource("/css/app.css").toExternalForm());
+        Button ok = (Button) d.getDialogPane().lookupButton(ButtonType.OK);
+        ok.setDisable(fn.getText().isBlank());
+        fn.textProperty().addListener((o, ov, nv) -> ok.setDisable(nv == null || nv.isBlank()));
+        d.setResultConverter(btn -> btn != ButtonType.OK ? null :
+                Map.of("firstName", fn.getText().trim(), "lastName", ln.getText().trim(),
+                        "organization", org.getText().trim(), "contactInfo", ci.getText().trim()));
+        return d;
+    }
+
+    private TextField field(String v) { TextField tf = new TextField(v); tf.getStyleClass().add("text-field-lg"); return tf; }
+    private Label lbl(String t)       { Label l = new Label(t); l.getStyleClass().add("field-label"); return l; }
+    protected static String str(Object o) { return o == null ? "" : o.toString(); }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/OrganizersTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.OrganizerApiClient;
+import com.npopov.philharmonic.client.model.OrganizerModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+public class OrganizersTabController extends BaseTabController<OrganizerModel> {
+
+    @Override
+    protected void buildColumns() {
+        tableView.getColumns().addAll(
+                col("ID",       60,  "id"),
+                col("Название", 200, "name"),
+                col("Тип",      120, "type"),
+                col("Контакт",  200, "contactInfo")
+        );
+    }
+
+    @Override
+    protected List<OrganizerModel> loadData() {
+        return OrganizerApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<OrganizerModel> buildFilter(String q) {
+        if (q == null || q.isBlank()) return p -> true;
+        return o -> str(o.getName()).toLowerCase().contains(q)
+                || str(o.getType()).toLowerCase().contains(q)
+                || str(o.getContactInfo()).toLowerCase().contains(q);
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        dialog(null).showAndWait().ifPresent(body -> {
+            try { OrganizerApiClient.getInstance().create(body); refresh(); }
+            catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void showEditDialog(OrganizerModel item) {
+        dialog(item).showAndWait().ifPresent(body -> {
+            try { OrganizerApiClient.getInstance().update(item.getId(), body); refresh(); }
+            catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void deleteSelected(OrganizerModel item) {
+        OrganizerApiClient.getInstance().delete(item.getId());
+    }
+
+    private <V> TableColumn<OrganizerModel, V> col(String t, double w, String p) {
+        TableColumn<OrganizerModel, V> c = new TableColumn<>(t);
+        c.setPrefWidth(w); c.setCellValueFactory(new PropertyValueFactory<>(p)); return c;
+    }
+
+    private Dialog<Map<String, Object>> dialog(OrganizerModel ex) {
+        Dialog<Map<String, Object>> d = new Dialog<>();
+        d.setTitle(ex == null ? "Новый организатор" : "Редактировать организатора");
+        d.setHeaderText(null);
+        TextField name = field(ex != null ? str(ex.getName())        : "");
+        TextField type = field(ex != null ? str(ex.getType())        : "");
+        TextField ci   = field(ex != null ? str(ex.getContactInfo()) : "");
+        javafx.scene.layout.GridPane g = new javafx.scene.layout.GridPane();
+        g.setHgap(10); g.setVgap(8);
+        g.addRow(0, lbl("Название *"), name);
+        g.addRow(1, lbl("Тип"),        type);
+        g.addRow(2, lbl("Контакт"),    ci);
+        g.setPadding(new javafx.geometry.Insets(16)); name.setPrefWidth(220);
+        d.getDialogPane().setContent(g);
+        d.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        d.getDialogPane().getStylesheets().add(getClass().getResource("/css/app.css").toExternalForm());
+        Button ok = (Button) d.getDialogPane().lookupButton(ButtonType.OK);
+        ok.setDisable(name.getText().isBlank());
+        name.textProperty().addListener((o, ov, nv) -> ok.setDisable(nv == null || nv.isBlank()));
+        d.setResultConverter(btn -> btn != ButtonType.OK ? null :
+                Map.of("name", name.getText().trim(), "type", type.getText().trim(),
+                        "contactInfo", ci.getText().trim()));
+        return d;
+    }
+
+    private TextField field(String v) { TextField tf = new TextField(v); tf.getStyleClass().add("text-field-lg"); return tf; }
+    private Label lbl(String t)       { Label l = new Label(t); l.getStyleClass().add("field-label"); return l; }
+    protected static String str(Object o) { return o == null ? "" : o.toString(); }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/UsersTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.RoleApiClient;
+import com.npopov.philharmonic.client.api.UserAdminApiClient;
+import com.npopov.philharmonic.client.model.RoleModel;
+import com.npopov.philharmonic.client.model.UserModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.geometry.Insets;
+
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+public class UsersTabController extends BaseTabController<UserModel> {
+
+    @Override
+    protected void buildColumns() {
+        TableColumn<UserModel, Long> colId = new TableColumn<>("ID");
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colId.setPrefWidth(60);
+
+        TableColumn<UserModel, String> colUsername = new TableColumn<>("Логин");
+        colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colUsername.setPrefWidth(150);
+
+        TableColumn<UserModel, String> colEmail = new TableColumn<>("Email");
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colEmail.setPrefWidth(200);
+
+        TableColumn<UserModel, Boolean> colEnabled = new TableColumn<>("Активен");
+        colEnabled.setCellValueFactory(new PropertyValueFactory<>("enabled"));
+        colEnabled.setPrefWidth(80);
+
+        TableColumn<UserModel, String> colRoles = new TableColumn<>("Роли");
+        colRoles.setCellValueFactory(cd -> {
+            String roles = cd.getValue().getRoles().stream()
+                    .map(RoleModel::getName)
+                    .collect(Collectors.joining(", "));
+            return new SimpleStringProperty(roles);
+        });
+        colRoles.setPrefWidth(200);
+
+        tableView.getColumns().addAll(colId, colUsername, colEmail, colEnabled, colRoles);
+    }
+
+    @Override
+    protected List<UserModel> loadData() {
+        return UserAdminApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<UserModel> buildFilter(String q) {
+        if (q == null || q.isBlank()) return u -> true;
+        return u -> str(u.getUsername()).toLowerCase().contains(q) ||
+                str(u.getEmail()).toLowerCase().contains(q);
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        userDialog(null).showAndWait().ifPresent(body -> {
+            try {
+                UserAdminApiClient.getInstance().create(body);
+                refresh();
+            } catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void showEditDialog(UserModel item) {
+        userDialog(item).showAndWait().ifPresent(body -> {
+            try {
+                UserAdminApiClient.getInstance().update(item.getId(), body);
+                // Если в теле есть roleIds, обновим отдельно
+                if (body.containsKey("roleIds")) {
+                    @SuppressWarnings("unchecked")
+                    Set<Long> roleIds = (Set<Long>) body.get("roleIds");
+                    UserAdminApiClient.getInstance().assignRoles(item.getId(), roleIds);
+                }
+                refresh();
+            } catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void deleteSelected(UserModel item) {
+        UserAdminApiClient.getInstance().delete(item.getId());
+    }
+
+    private Dialog<Map<String, Object>> userDialog(UserModel existing) {
+        Dialog<Map<String, Object>> dialog = new Dialog<>();
+        dialog.setTitle(existing == null ? "Новый пользователь" : "Редактировать пользователя");
+        dialog.setHeaderText(null);
+
+        TextField usernameField = new TextField(existing != null ? existing.getUsername() : "");
+        TextField emailField    = new TextField(existing != null ? existing.getEmail() : "");
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Пароль (только при создании)");
+        CheckBox enabledCheck = new CheckBox("Активен");
+        if (existing != null) enabledCheck.setSelected(existing.getEnabled());
+
+        // ComboBox для множественного выбора ролей
+        ListView<RoleModel> rolesList = new ListView<>();
+        rolesList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        // Загружаем все роли
+        try {
+            List<RoleModel> allRoles = RoleApiClient.getInstance().findAll();
+            rolesList.setItems(FXCollections.observableArrayList(allRoles));
+            if (existing != null) {
+                Set<Long> existingRoleIds = existing.getRoles().stream()
+                        .map(RoleModel::getId)
+                        .collect(Collectors.toSet());
+                rolesList.getSelectionModel().clearSelection();
+                for (int i = 0; i < allRoles.size(); i++) {
+                    if (existingRoleIds.contains(allRoles.get(i).getId())) {
+                        rolesList.getSelectionModel().select(i);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            rolesList.setPlaceholder(new Label("Ошибка загрузки ролей"));
+        }
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(8);
+        grid.setPadding(new Insets(16));
+        grid.addRow(0, new Label("Логин *"), usernameField);
+        grid.addRow(1, new Label("Email"), emailField);
+        if (existing == null) {
+            grid.addRow(2, new Label("Пароль *"), passwordField);
+        }
+        grid.addRow(3, new Label("Активен"), enabledCheck);
+        grid.addRow(4, new Label("Роли"), rolesList);
+
+        dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+
+
+        Button okBtn = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+        okBtn.setDisable(usernameField.getText().isBlank() ||
+                (existing == null && passwordField.getText().isBlank()));
+        usernameField.textProperty().addListener((o, ov, nv) -> okBtn.setDisable(nv.isBlank()));
+        if (existing == null) {
+            passwordField.textProperty().addListener((o, ov, nv) ->
+                    okBtn.setDisable(usernameField.getText().isBlank() || nv.isBlank()));
+        }
+
+        dialog.setResultConverter(btn -> {
+            if (btn != ButtonType.OK) return null;
+            Map<String, Object> data = new HashMap<>();
+            data.put("username", usernameField.getText().trim());
+            data.put("email", emailField.getText().trim());
+            data.put("enabled", enabledCheck.isSelected());
+            if (existing == null) {
+                data.put("password", passwordField.getText());
+            }
+            Set<Long> selectedRoleIds = rolesList.getSelectionModel().getSelectedItems().stream()
+                    .map(RoleModel::getId)
+                    .collect(Collectors.toSet());
+            data.put("roleIds", selectedRoleIds);
+            return data;
+        });
+
+        return dialog;
+    }
+}
+
+
+===== src/main/java/com/npopov/philharmonic/client/ui/tabs/VenuesTabController.java =====
+package com.npopov.philharmonic.client.ui.tabs;
+
+import com.npopov.philharmonic.client.api.VenueApiClient;
+import com.npopov.philharmonic.client.model.VenueModel;
+import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import com.npopov.philharmonic.client.ui.dialog.VenueDialog;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+public class VenuesTabController extends BaseTabController<VenueModel> {
+
+    private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    private ComboBox<String> typeFilter;
+
+    @Override
+    protected void buildColumns() {
+        tableView.getColumns().addAll(
+                col("ID",          60,  "id"),
+                col("Название",   200,  "name"),
+                col("Тип",        120,  "venueType"),
+                col("Город",      120,  "city"),
+                col("Адрес",      200,  "address"),
+                col("Описание",   200,  "description")
+        );
+    }
+
+    @Override
+    @FXML
+    public void initialize() {
+        // Add type filter ComboBox to the filterBar before base init
+        typeFilter = new ComboBox<>(FXCollections.observableArrayList(
+                "Все", "THEATRE", "CINEMA", "CONCERT_VENUE", "VARIETY_STAGE", "CULTURAL_CENTRE"));
+        typeFilter.getStyleClass().add("combo-box");
+        typeFilter.setPrefWidth(160);
+        typeFilter.setValue("Все");
+        typeFilter.setOnAction(e -> {
+            if (filteredData != null && searchField != null) {
+                applyTypeFilter();
+            }
+        });
+        super.initialize();
+        filterBar.getChildren().add(0, typeFilter);
+    }
+
+    private void applyTypeFilter() {
+        String type  = typeFilter.getValue();
+        String query = searchField.getText() == null ? "" : searchField.getText().toLowerCase();
+        filteredData.setPredicate(v ->
+                ("Все".equals(type) || type.equals(v.getVenueType())) &&
+                buildFilter(query).test(v));
+    }
+
+    @Override
+    protected List<VenueModel> loadData() {
+        return VenueApiClient.getInstance().findAll();
+    }
+
+    @Override
+    protected Predicate<VenueModel> buildFilter(String q) {
+        String type = typeFilter != null ? typeFilter.getValue() : "Все";
+        return v -> {
+            boolean typeOk = "Все".equals(type) || type.equals(v.getVenueType());
+            if (q == null || q.isBlank()) return typeOk;
+            return typeOk && (
+                    str(v.getName()).toLowerCase().contains(q) ||
+                    str(v.getCity()).toLowerCase().contains(q) ||
+                    str(v.getAddress()).toLowerCase().contains(q));
+        };
+    }
+
+    @Override
+    protected void showCreateDialog() {
+        VenueDialog d = new VenueDialog(null);
+        d.showAndWait().ifPresent(body -> {
+            try {
+                VenueApiClient.getInstance().create(body);
+                refresh();
+            } catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void showEditDialog(VenueModel item) {
+        VenueDialog d = new VenueDialog(item);
+        d.showAndWait().ifPresent(body -> {
+            try {
+                VenueApiClient.getInstance().update(item.getId(), body);
+                refresh();
+            } catch (Exception ex) { showError(ex.getMessage()); }
+        });
+    }
+
+    @Override
+    protected void deleteSelected(VenueModel item) {
+        VenueApiClient.getInstance().delete(item.getId());
+    }
+
+    private <V> TableColumn<VenueModel, V> col(String title, double width, String prop) {
+        TableColumn<VenueModel, V> c = new TableColumn<>(title);
+        c.setPrefWidth(width);
+        c.setCellValueFactory(new PropertyValueFactory<>(prop));
+        return c;
+    }
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/util/AppConfig.java =====
+package com.npopov.philharmonic.client.util;
+
+/**
+ * Centralized application configuration.
+ * Base URL can be overridden via system property: -Dapi.baseUrl=http://...
+ */
+public final class AppConfig {
+
+    public static final String BASE_URL =
+            System.getProperty("api.baseUrl", "http://localhost:8080");
+
+    public static final int CONNECT_TIMEOUT_SECONDS = 5;
+    public static final int REQUEST_TIMEOUT_SECONDS = 15;
+
+    // Window sizing
+    public static final double LOGIN_WIDTH  = 420;
+    public static final double LOGIN_HEIGHT = 520;
+    public static final double MAIN_WIDTH   = 1280;
+    public static final double MAIN_HEIGHT  = 800;
+
+    private AppConfig() {}
+}
+
+
+
+===== src/main/java/com/npopov/philharmonic/client/util/JsonMapper.java =====
+package com.npopov.philharmonic.client.util;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+/**
+ * Shared Jackson ObjectMapper configured for the Philharmonic API:
+ *  - camelCase ↔ camelCase (server returns camelCase JSON)
+ *  - JavaTimeModule for LocalDate / LocalDateTime
+ *  - unknown properties ignored (forward compatibility)
+ */
+public final class JsonMapper {
+
+    private static final ObjectMapper MAPPER = new ObjectMapper()
+            .registerModule(new JavaTimeModule())
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+    private JsonMapper() {}
+
+    public static ObjectMapper get() {
+        return MAPPER;
+    }
+}
+
+
+
+===== src/main/java/module-info.java =====
+module com.npopov.philharmonic.client {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.datatype.jsr310;
+    requires atlantafx.base;
+    requires java.net.http;
+    requires commons.io;
+
+    opens com.npopov.philharmonic.client to javafx.fxml;
+    opens com.npopov.philharmonic.client.ui.auth to javafx.fxml;
+    opens com.npopov.philharmonic.client.ui.main to javafx.fxml;
+    opens com.npopov.philharmonic.client.ui.tabs to javafx.fxml;
+    opens com.npopov.philharmonic.client.ui.components to javafx.fxml;
+    opens com.npopov.philharmonic.client.model to com.fasterxml.jackson.databind;
+
+    exports com.npopov.philharmonic.client;
+    exports com.npopov.philharmonic.client.api;
+    exports com.npopov.philharmonic.client.model;
+    exports com.npopov.philharmonic.client.session;
+    exports com.npopov.philharmonic.client.util;
+    exports com.npopov.philharmonic.client.ui.auth;
+    exports com.npopov.philharmonic.client.ui.main;
+    exports com.npopov.philharmonic.client.ui.tabs;
+    exports com.npopov.philharmonic.client.ui.components;
+}
+
+
+
+===== src/main/resources/com/npopov/philharmonic/client/hello-view.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.npopov.philharmonic.client.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label fx:id="welcomeText"/>
+    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+</VBox>
+
+
+
+===== src/main/resources/css/app.css =====
+/* ═══════════════════════════════════════════════════════
+   Philharmonic Client — Application Stylesheet
+   Base: AtlantaFX Primer Dark + custom overrides
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Root colors ────────────────────────────────────────── */
+.root {
+    -color-bg-primary:    #0d1117;
+    -color-bg-secondary:  #161b22;
+    -color-bg-card:       #1c2333;
+    -color-bg-hover:      #21293b;
+    -color-accent:        #4f8ef7;
+    -color-accent-hover:  #6aa3ff;
+    -color-danger:        #f85149;
+    -color-success:       #3fb950;
+    -color-warning:       #d29922;
+    -color-text-primary:  #e6edf3;
+    -color-text-secondary:#8b949e;
+    -color-text-muted:    #484f58;
+    -color-border:        #30363d;
+    -color-border-subtle: #21262d;
+
+    -fx-font-family: "Segoe UI", "SF Pro Display", "Helvetica Neue", sans-serif;
+    -fx-font-size: 13px;
+    -fx-base:          #0d1117;
+    -fx-background:    #0d1117;
+    -fx-control-inner-background: #161b22;
+    -fx-text-fill: -color-text-primary;
+}
+
+/* ── Login Screen ───────────────────────────────────────── */
+.login-root {
+    -fx-background-color: -color-bg-primary;
+}
+
+.login-card {
+    -fx-background-color: -color-bg-card;
+    -fx-background-radius: 16;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 32, 0, 0, 8);
+}
+
+.login-header {
+    -fx-padding: 32 32 0 32;
+}
+
+.login-logo {
+    -fx-font-size: 42px;
+}
+
+.login-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.login-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-secondary;
+}
+
+.login-form {
+    -fx-padding: 0 32 0 32;
+}
+
+.login-footer {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-text-muted;
+}
+
+.field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-secondary;
+}
+
+.text-field-lg {
+    -fx-font-size: 14px;
+    -fx-padding: 10 14;
+    -fx-background-color: -color-bg-secondary;
+    -fx-background-radius: 8;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-text-fill: -color-text-primary;
+    -fx-prompt-text-fill: -color-text-muted;
+}
+
+.text-field-lg:focused {
+    -fx-border-color: -color-accent;
+    -fx-border-width: 1.5;
+}
+
+.btn-primary-lg {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 0;
+    -fx-background-color: -color-accent;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.btn-primary-lg:hover {
+    -fx-background-color: -color-accent-hover;
+}
+
+.btn-primary-lg:disabled {
+    -fx-opacity: 0.5;
+}
+
+.error-label {
+    -fx-text-fill: -color-danger;
+    -fx-font-size: 12px;
+    -fx-padding: 6 10;
+    -fx-background-color: rgba(248, 81, 73, 0.12);
+    -fx-background-radius: 6;
+}
+
+/* ── Top Bar ────────────────────────────────────────────── */
+.main-root {
+    -fx-background-color: -color-bg-primary;
+}
+
+.top-bar {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 20;
+    -fx-pref-height: 52;
+}
+
+.topbar-logo {
+    -fx-font-size: 22px;
+}
+
+.topbar-title {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.auth-area {
+    -fx-padding: 4 0;
+}
+
+.role-badge {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 8;
+    -fx-background-color: rgba(79, 142, 247, 0.18);
+    -fx-text-fill: -color-accent;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(79, 142, 247, 0.35);
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}
+
+.username-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-primary;
+}
+
+.btn-logout {
+    -fx-font-size: 12px;
+    -fx-padding: 5 12;
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-secondary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-logout:hover {
+    -fx-background-color: rgba(248, 81, 73, 0.12);
+    -fx-text-fill: -color-danger;
+    -fx-border-color: -color-danger;
+}
+
+/* ── Tab Pane ───────────────────────────────────────────── */
+.main-tabs {
+    -fx-background-color: -color-bg-primary;
+    -fx-tab-min-height: 40;
+}
+
+.main-tabs .tab-header-area {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0 8;
+}
+
+.main-tabs .tab {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-secondary;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.main-tabs .tab:hover {
+    -fx-text-fill: -color-text-primary;
+    -fx-background-color: -color-bg-hover;
+}
+
+.main-tabs .tab:selected {
+    -fx-text-fill: -color-accent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -color-accent transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.main-tabs .tab-content-area {
+    -fx-background-color: -color-bg-primary;
+    -fx-padding: 0;
+}
+
+/* ── Status Bar ─────────────────────────────────────────── */
+.status-bar {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 4 16;
+    -fx-pref-height: 28;
+}
+
+.status-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-text-muted;
+}
+
+.server-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -color-text-muted;
+    -fx-font-family: monospace;
+}
+
+/* ── Generic table styling ──────────────────────────────── */
+.table-view {
+    -fx-background-color: -color-bg-primary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.table-view .column-header {
+    -fx-background-color: -color-bg-secondary;
+    -fx-text-fill: -color-text-secondary;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 0 12;
+    -fx-pref-height: 38;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -color-bg-secondary;
+}
+
+.table-row-cell {
+    -fx-background-color: -color-bg-primary;
+    -fx-border-color: transparent transparent -color-border-subtle transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0;
+    -fx-pref-height: 40;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(79, 142, 247, 0.14);
+}
+
+.table-row-cell .table-cell {
+    -fx-text-fill: -color-text-primary;
+    -fx-padding: 0 12;
+    -fx-font-size: 13px;
+}
+
+/* ── Tab content area utilities ─────────────────────────── */
+.tab-content-root {
+    -fx-background-color: -color-bg-primary;
+    -fx-padding: 16;
+}
+
+.toolbar-row {
+    -fx-padding: 0 0 12 0;
+    -fx-spacing: 10;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.search-field {
+    -fx-pref-width: 240;
+    -fx-font-size: 13px;
+    -fx-padding: 7 12;
+    -fx-background-color: -color-bg-secondary;
+    -fx-background-radius: 6;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-text-fill: -color-text-primary;
+    -fx-prompt-text-fill: -color-text-muted;
+}
+
+.search-field:focused {
+    -fx-border-color: -color-accent;
+}
+
+.btn-action {
+    -fx-font-size: 12px;
+    -fx-padding: 6 14;
+    -fx-background-color: -color-accent;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-action:hover {
+    -fx-background-color: -color-accent-hover;
+}
+
+.btn-secondary {
+    -fx-font-size: 12px;
+    -fx-padding: 6 14;
+    -fx-background-color: -color-bg-secondary;
+    -fx-text-fill: -color-text-primary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+.btn-danger {
+    -fx-font-size: 12px;
+    -fx-padding: 6 14;
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-danger;
+    -fx-border-color: -color-danger;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-danger:hover {
+    -fx-background-color: rgba(248, 81, 73, 0.12);
+}
+
+.combo-box {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: -color-text-primary;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -color-bg-card;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: -color-text-primary;
+    -fx-background-color: transparent;
+    -fx-padding: 6 12;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+/* ── ScrollBar ──────────────────────────────────────────── */
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: -color-border;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: -color-text-muted;
+}
+
+.scroll-bar .track, .scroll-bar .track-background,
+.scroll-bar .increment-button, .scroll-bar .decrement-button,
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0;
+    -fx-pref-width: 0;
+}
+
+
+
+===== src/main/resources/fxml/base_tab.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is a TEMPLATE — each tab's fxml includes its own column definitions.
+     Each tab controller extends BaseTabController which expects these fx:id bindings. -->
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="tab-content-root"
+      spacing="12">
+
+    <!-- Toolbar row -->
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField"
+                   promptText="🔍  Поиск..."
+                   styleClass="search-field"/>
+
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Button fx:id="btnRefresh" text="↻  Обновить"
+                onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"
+                onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"
+                onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"
+                onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+
+    <!-- Table -->
+    <TableView fx:id="tableView"
+               VBox.vgrow="ALWAYS"
+               styleClass="table-view">
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/>
+        </columnResizePolicy>
+    </TableView>
+
+    <!-- Status row -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner"
+                           prefWidth="16" prefHeight="16"
+                           visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+
+</VBox>
+
+
+
+===== src/main/resources/fxml/login.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/25"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.npopov.philharmonic.client.ui.auth.LoginController"
+           styleClass="login-root">
+
+    <VBox fx:id="formBox"
+          alignment="CENTER"
+          spacing="0"
+          maxWidth="360"
+          styleClass="login-card">
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="6" styleClass="login-header">
+            <Label text="🎼" styleClass="login-logo"/>
+            <Label text="Филармония" styleClass="login-title"/>
+            <Label text="Система управления" styleClass="login-subtitle"/>
+        </VBox>
+
+        <!-- Form fields -->
+        <VBox spacing="12" styleClass="login-form">
+            <VBox.margin>
+                <Insets top="32" right="0" bottom="0" left="0"/>
+            </VBox.margin>
+
+            <VBox spacing="6">
+                <Label text="Логин" styleClass="field-label"/>
+                <TextField fx:id="usernameField"
+                           promptText="Введите логин"
+                           styleClass="text-field-lg"/>
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="Пароль" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField"
+                               promptText="Введите пароль"
+                               styleClass="text-field-lg"/>
+            </VBox>
+
+            <!-- Error message -->
+            <Label fx:id="errorLabel"
+                   wrapText="true"
+                   styleClass="error-label"/>
+
+            <!-- Submit -->
+            <VBox spacing="10" alignment="CENTER">
+                <VBox.margin>
+                    <Insets top="8"/>
+                </VBox.margin>
+                <Button fx:id="loginButton"
+                        text="Войти"
+                        maxWidth="Infinity"
+                        defaultButton="true"
+                        onAction="#handleLogin"
+                        styleClass="btn-primary-lg"/>
+                <ProgressIndicator fx:id="spinner"
+                                   prefWidth="28"
+                                   prefHeight="28"/>
+            </VBox>
+        </VBox>
+
+        <!-- Footer -->
+<!--        <Label styleClass="login-footer"-->
+<!--               text="Philharmonic DB Client v1.0">-->
+<!--            <VBox.margin>-->
+<!--                <Insets top="24" bottom="16"/>-->
+<!--            </VBox.margin>-->
+<!--        </Label>-->
+
+
+        <Label fx:id="footerLabel"
+               styleClass="server-label">
+            <VBox.margin>
+                <Insets top="24" bottom="16"/>
+            </VBox.margin>
+        </Label>
+
+    </VBox>
+</StackPane>
+
+
+
+===== src/main/resources/fxml/main.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.npopov.philharmonic.client.ui.main.MainController"
+            styleClass="main-root">
+
+    <!-- ── Top bar ─────────────────────────────────────────────────────── -->
+    <top>
+        <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="16">
+            <HBox.margin><Insets bottom="0"/></HBox.margin>
+
+            <Label text="🎼" styleClass="topbar-logo"/>
+            <Label text="Филармония" styleClass="topbar-title"/>
+
+            <!-- Spacer -->
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- Auth info (right side) -->
+            <HBox alignment="CENTER" spacing="10" styleClass="auth-area">
+                <Label fx:id="roleLabel" styleClass="role-badge"/>
+                <Label fx:id="usernameLabel" styleClass="username-label"/>
+                <Button text="Выйти"
+                        onAction="#handleLogout"
+                        styleClass="btn-logout"/>
+            </HBox>
+        </HBox>
+    </top>
+
+    <!-- ── Center: tab pane ────────────────────────────────────────────── -->
+    <center>
+        <TabPane fx:id="tabPane"
+                 tabClosingPolicy="UNAVAILABLE"
+                 styleClass="main-tabs">
+
+            <Tab text="Мероприятия" fx:id="tabEvents">
+                <StackPane fx:id="eventsPane"/>
+            </Tab>
+
+            <Tab text="Артисты" fx:id="tabArtists">
+                <StackPane fx:id="artistsPane"/>
+            </Tab>
+
+            <Tab text="Площадки" fx:id="tabVenues">
+                <StackPane fx:id="venuesPane"/>
+            </Tab>
+
+            <Tab text="Импресарио" fx:id="tabImpresarios">
+                <StackPane fx:id="impresariosPane"/>
+            </Tab>
+
+            <Tab text="Организаторы" fx:id="tabOrganizers">
+                <StackPane fx:id="organizersPane"/>
+            </Tab>
+
+            <Tab text="Конкурсы" fx:id="tabCompetitions">
+                <StackPane fx:id="competitionsPane"/>
+            </Tab>
+
+            <Tab text="Результаты" fx:id="tabResults">
+                <StackPane fx:id="resultsPane"/>
+            </Tab>
+
+            <Tab text="Жанры" fx:id="tabGenres">
+                <StackPane fx:id="genresPane"/>
+            </Tab>
+
+            <Tab text="Пользователи" fx:id="tabUsers">
+                <StackPane fx:id="usersPane"/>
+            </Tab>
+
+            <Tab text="Роли" fx:id="tabRoles">
+                <StackPane fx:id="rolesPane"/>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+    <!-- ── Bottom: status bar ──────────────────────────────────────────── -->
+    <bottom>
+        <HBox styleClass="status-bar" spacing="8" alignment="CENTER_LEFT">
+            <Label fx:id="statusLabel" text="Готово" styleClass="status-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="serverLabel"
+                   styleClass="server-label"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
+
+
+
+===== src/main/resources/fxml/tabs/artists.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.ArtistsTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+
+
+===== src/main/resources/fxml/tabs/competitions.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.CompetitionsTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+
+
+===== src/main/resources/fxml/tabs/events.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.EventsTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+
+
+===== src/main/resources/fxml/tabs/genres.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.GenresTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+
+
+===== src/main/resources/fxml/tabs/impresarios.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.ImpresariosTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+
+
+===== src/main/resources/fxml/tabs/organizers.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.OrganizersTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+
+
+===== src/main/resources/fxml/tabs/results.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.CompetitionResultsTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+
+
+===== src/main/resources/fxml/tabs/users.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.UsersTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+
+
+===== src/main/resources/fxml/tabs/venues.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.npopov.philharmonic.client.ui.tabs.VenuesTabController"
+      styleClass="tab-content-root"
+      spacing="12">
+    <HBox styleClass="toolbar-row" spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="🔍  Поиск..." styleClass="search-field"/>
+        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnRefresh" text="↻  Обновить" onAction="#refresh" styleClass="btn-secondary"/>
+        <Button fx:id="btnCreate"  text="＋  Создать"  onAction="#handleCreate" styleClass="btn-action"/>
+        <Button fx:id="btnEdit"    text="✎  Изменить"  onAction="#handleEdit" styleClass="btn-secondary"/>
+        <Button fx:id="btnDelete"  text="✕  Удалить"   onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+    <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+    </TableView>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <ProgressIndicator fx:id="loadingSpinner" prefWidth="16" prefHeight="16" visible="false"/>
+        <Label fx:id="statusLabel" styleClass="status-label"/>
+    </HBox>
+</VBox>
+
+

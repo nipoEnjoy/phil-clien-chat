@@ -6,18 +6,22 @@ import java.util.List;
 import java.util.Map;
 
 public class CompetitionApiClient extends BaseApiClient {
+    private static final String PATH = "/api/competitions";
+//    private static final String PATH = "/api/events?eventType=" + "competition";
+
     private static final CompetitionApiClient INSTANCE = new CompetitionApiClient();
     public static CompetitionApiClient getInstance() { return INSTANCE; }
     private CompetitionApiClient() {}
 
     public List<CompetitionModel> findAll() {
-        return getList("/api/competitions", new TypeReference<>() {});
+        return getList(PATH, new TypeReference<>() {});
     }
+
     public CompetitionModel create(Map<String, Object> body) {
-        return post("/api/competitions", body, CompetitionModel.class);
+        return post(PATH, body, CompetitionModel.class);
     }
     public CompetitionModel update(Long id, Map<String, Object> body) {
-        return put("/api/competitions/" + id, body, CompetitionModel.class);
+        return put(PATH + id, body, CompetitionModel.class);
     }
-    public void delete(Long id) { delete("/api/competitions/" + id); }
+    public void delete(Long id) { delete(PATH + id); }
 }

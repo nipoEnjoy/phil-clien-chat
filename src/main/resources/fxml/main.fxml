@@ -37,36 +37,44 @@
                  tabClosingPolicy="UNAVAILABLE"
                  styleClass="main-tabs">
 
-            <Tab text="🎭 Мероприятия" fx:id="tabEvents">
+            <Tab text="Мероприятия" fx:id="tabEvents">
                 <StackPane fx:id="eventsPane"/>
             </Tab>
 
-            <Tab text="🎤 Артисты" fx:id="tabArtists">
+            <Tab text="Артисты" fx:id="tabArtists">
                 <StackPane fx:id="artistsPane"/>
             </Tab>
 
-            <Tab text="🏛 Площадки" fx:id="tabVenues">
+            <Tab text="Площадки" fx:id="tabVenues">
                 <StackPane fx:id="venuesPane"/>
             </Tab>
 
-            <Tab text="👔 Импресарио" fx:id="tabImpresarios">
+            <Tab text="Импресарио" fx:id="tabImpresarios">
                 <StackPane fx:id="impresariosPane"/>
             </Tab>
 
-            <Tab text="🏢 Организаторы" fx:id="tabOrganizers">
+            <Tab text="Организаторы" fx:id="tabOrganizers">
                 <StackPane fx:id="organizersPane"/>
             </Tab>
 
-            <Tab text="🏆 Конкурсы" fx:id="tabCompetitions">
+            <Tab text="Конкурсы" fx:id="tabCompetitions">
                 <StackPane fx:id="competitionsPane"/>
             </Tab>
 
-            <Tab text="🥇 Результаты" fx:id="tabResults">
+            <Tab text="Результаты" fx:id="tabResults">
                 <StackPane fx:id="resultsPane"/>
             </Tab>
 
-            <Tab text="🥇 Жанры" fx:id="tabGenres">
+            <Tab text="Жанры" fx:id="tabGenres">
                 <StackPane fx:id="genresPane"/>
+            </Tab>
+
+            <Tab text="Пользователи" fx:id="tabUsers">
+                <StackPane fx:id="usersPane"/>
+            </Tab>
+
+            <Tab text="Роли" fx:id="tabRoles">
+                <StackPane fx:id="rolesPane"/>
             </Tab>
 
         </TabPane>

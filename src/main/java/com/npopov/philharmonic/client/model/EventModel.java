@@ -18,6 +18,14 @@ public class EventModel {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    // Поля для Concert
+    private String program;
+
+    // Поля для Competition
+    private String competitionType;
+    private String rules;
+    private String juryInfo;
+
     public EventModel() {}
 
     public Long getId() { return id; }
@@ -44,4 +52,17 @@ public class EventModel {
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getProgram() { return program; }
+    public void setProgram(String program) { this.program = program; }
+
+    public String getCompetitionType() { return competitionType; }
+    public void setCompetitionType(String competitionType) { this.competitionType = competitionType; }
+    public String getRules() { return rules; }
+    public void setRules(String rules) { this.rules = rules; }
+    public String getJuryInfo() { return juryInfo; }
+
+    public void setJuryInfo(String juryInfo) {
+        this.juryInfo = juryInfo;
+    }
 }
