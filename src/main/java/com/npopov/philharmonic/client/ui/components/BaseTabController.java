@@ -9,6 +9,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public abstract class BaseTabController<T> {
     @FXML protected Button        btnEdit;
     @FXML protected Button        btnDelete;
     @FXML protected Label         statusLabel;
-    @FXML protected HBox          filterBar;     // subclasses may add filter controls here
+    @FXML protected FlowPane filterBar;     // subclasses may add filter controls here
     @FXML protected ProgressIndicator loadingSpinner;
 
     protected final ObservableList<T> masterData    = FXCollections.observableArrayList();

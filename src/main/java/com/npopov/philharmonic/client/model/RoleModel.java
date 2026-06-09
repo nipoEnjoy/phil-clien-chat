@@ -51,7 +51,7 @@ public class RoleModel {
     }
 
     public Boolean getPermission(CrudPermissions permission) {
-        return permissions.add(permission);
+        return permissions != null && permissions.contains(permission);
     }
 
     public void setPermission(CrudPermissions permission) {

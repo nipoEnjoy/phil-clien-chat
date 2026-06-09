@@ -1,17 +1,70 @@
 package com.npopov.philharmonic.client.ui.tabs;
 
+import com.npopov.philharmonic.client.api.CompetitionApiClient;
 import com.npopov.philharmonic.client.api.CompetitionResultApiClient;
+import com.npopov.philharmonic.client.model.CompetitionModel;
 import com.npopov.philharmonic.client.model.CompetitionResultModel;
 import com.npopov.philharmonic.client.ui.components.BaseTabController;
 import com.npopov.philharmonic.client.ui.dialog.CompetitionResultDialog;
+import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.StringConverter;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
 public class CompetitionResultsTabController extends BaseTabController<CompetitionResultModel> {
+
+    private ComboBox<CompetitionModel> competitionFilter;
+
+    @Override
+    @FXML
+    public void initialize() {
+        competitionFilter = new ComboBox<>();
+        competitionFilter.setPromptText("Конкурс");
+
+        Button applyBtn = new Button("🔍 Показать призёров");
+        applyBtn.setOnAction(e -> refresh());
+        Button resetBtn = new Button("✖ Сброс");
+        resetBtn.setOnAction(e -> {
+            competitionFilter.getSelectionModel().clearSelection();
+            refresh();
+        });
+
+        filterBar.getChildren().addAll(competitionFilter, applyBtn, resetBtn);
+
+        loadCompetitions();
+
+        super.initialize();
+    }
+
+    private void loadCompetitions() {
+        Task<List<CompetitionModel>> task = new Task<>() {
+            @Override protected List<CompetitionModel> call() { return CompetitionApiClient.getInstance().findAll(); }
+        };
+        task.setOnSucceeded(e -> {
+            competitionFilter.setItems(FXCollections.observableArrayList(task.getValue()));
+            competitionFilter.setConverter(new StringConverter<>() {
+                @Override public String toString(CompetitionModel c) { return c == null ? "" : c.getTitle(); }
+                @Override public CompetitionModel fromString(String s) { return null; }
+            });
+        });
+        new Thread(task).start();
+    }
+
+    @Override
+    protected List<CompetitionResultModel> loadData() {
+        CompetitionModel competition = competitionFilter.getValue();
+        if (competition != null) {
+            return CompetitionResultApiClient.getInstance().findByCompetition(competition.getId());
+        } else {
+            return CompetitionResultApiClient.getInstance().findAll();
+        }
+    }
 
     @Override
     protected void buildColumns() {
@@ -23,11 +76,6 @@ public class CompetitionResultsTabController extends BaseTabController<Competiti
                 col("Место",        80,  "place"),
                 col("Награда",     200,  "award")
         );
-    }
-
-    @Override
-    protected List<CompetitionResultModel> loadData() {
-        return CompetitionResultApiClient.getInstance().findAll();
     }
 
     @Override

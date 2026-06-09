@@ -4,6 +4,7 @@ import com.npopov.philharmonic.client.api.RoleApiClient;
 import com.npopov.philharmonic.client.model.CrudPermissions;
 import com.npopov.philharmonic.client.model.RoleModel;
 import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import com.npopov.philharmonic.client.ui.util.DialogStyler;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -84,6 +85,8 @@ public class RolesTabController extends BaseTabController<RoleModel> {
         Dialog<Map<String, Object>> dialog = new Dialog<>();
         dialog.setTitle(existing == null ? "Новая роль" : "Редактировать роль");
         dialog.setHeaderText(null);
+
+        DialogStyler.applyStyles(dialog);
 
         TextField nameField = new TextField(existing != null ? existing.getName() : "");
         nameField.setPromptText("Название роли");

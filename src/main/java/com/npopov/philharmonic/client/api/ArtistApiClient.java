@@ -24,12 +24,30 @@ public class ArtistApiClient extends BaseApiClient {
         return post("/api/artists", body, ArtistModel.class);
     }
 
+    public List<ArtistModel> findByImpresario(Long impresarioId) {
+        String path = "/api/artists?impresarioId=" + impresarioId;
+        return getList(path, new TypeReference<>() {});
+    }
+
     public ArtistModel update(Long id, Map<String, Object> body) {
         return put("/api/artists/" + id, body, ArtistModel.class);
     }
 
+    public List<ArtistModel> findWithMultipleGenres() {
+        String path = "/api/artists?multipleGenres=true";
+        return getList(path, new TypeReference<>() {});
+    }
+
     public void delete(Long id) {
         delete("/api/artists/" + id);
+    }
+
+    public void addGenre(Long artistId, Long genreId) {
+        post("/api/artists/" + artistId + "/genres/" + genreId, null, Void.class);
+    }
+
+    public void removeGenre(Long artistId, Long genreId) {
+        delete("/api/artists/" + artistId + "/genres/" + genreId);
     }
 
     private String encode(String s) {

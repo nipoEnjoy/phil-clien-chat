@@ -23,4 +23,6 @@ module com.npopov.philharmonic.client {
     exports com.npopov.philharmonic.client.ui.main;
     exports com.npopov.philharmonic.client.ui.tabs;
     exports com.npopov.philharmonic.client.ui.components;
+    exports com.npopov.philharmonic.client.ui.dialog;
+    exports com.npopov.philharmonic.client.ui.util;
 }

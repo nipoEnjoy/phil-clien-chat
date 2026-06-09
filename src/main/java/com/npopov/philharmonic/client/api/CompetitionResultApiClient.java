@@ -15,14 +15,23 @@ public class CompetitionResultApiClient extends BaseApiClient {
     public List<CompetitionResultModel> findAll() {
         return getList(PATH, new TypeReference<>() {});
     }
-    public List<CompetitionResultModel> findByCompetition(Long competitionId) {
-        return getList(PATH + "?competitionId=" + competitionId, new TypeReference<>() {});
-    }
+
+//    public List<CompetitionResultModel> findByCompetition(Long competitionId) {
+//        return getList(PATH + "?competitionId=" + competitionId, new TypeReference<>() {});
+//    }
+
     public CompetitionResultModel create(Map<String, Object> body) {
         return post(PATH, body, CompetitionResultModel.class);
     }
+
     public CompetitionResultModel update(Long id, Map<String, Object> body) {
         return put(PATH + id, body, CompetitionResultModel.class);
     }
+
     public void delete(Long id) { delete(PATH + id); }
+
+    public List<CompetitionResultModel> findByCompetition(Long competitionId) {
+        String path = "/api/competition-results?competitionId=" + competitionId;
+        return getList(path, new TypeReference<>() {});
+    }
 }

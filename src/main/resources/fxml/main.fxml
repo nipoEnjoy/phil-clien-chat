@@ -77,6 +77,10 @@
                 <StackPane fx:id="rolesPane"/>
             </Tab>
 
+            <Tab text="Отчёты" fx:id="tabReports">
+                <StackPane fx:id="reportsPane"/>
+            </Tab>
+
         </TabPane>
     </center>
 

@@ -72,10 +72,6 @@ public class UserModel {
         return false;
     }
 
-    public Boolean isEnabled() {
-        return enabled;
-    }
-
     public Boolean getEnabled() {return enabled;}
 
     public void setEnabled(Boolean enabled) {

@@ -5,6 +5,7 @@ import com.npopov.philharmonic.client.api.UserAdminApiClient;
 import com.npopov.philharmonic.client.model.RoleModel;
 import com.npopov.philharmonic.client.model.UserModel;
 import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import com.npopov.philharmonic.client.ui.util.DialogStyler;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
@@ -75,7 +76,6 @@ public class UsersTabController extends BaseTabController<UserModel> {
         userDialog(item).showAndWait().ifPresent(body -> {
             try {
                 UserAdminApiClient.getInstance().update(item.getId(), body);
-                // Если в теле есть roleIds, обновим отдельно
                 if (body.containsKey("roleIds")) {
                     @SuppressWarnings("unchecked")
                     Set<Long> roleIds = (Set<Long>) body.get("roleIds");
@@ -95,6 +95,8 @@ public class UsersTabController extends BaseTabController<UserModel> {
         Dialog<Map<String, Object>> dialog = new Dialog<>();
         dialog.setTitle(existing == null ? "Новый пользователь" : "Редактировать пользователя");
         dialog.setHeaderText(null);
+
+        DialogStyler.applyStyles(dialog);
 
         TextField usernameField = new TextField(existing != null ? existing.getUsername() : "");
         TextField emailField    = new TextField(existing != null ? existing.getEmail() : "");

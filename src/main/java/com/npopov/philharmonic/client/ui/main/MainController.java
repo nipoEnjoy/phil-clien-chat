@@ -31,8 +31,9 @@ public class MainController {
     @FXML private StackPane genresPane;
     @FXML private StackPane usersPane;
     @FXML private StackPane rolesPane;
+    @FXML private StackPane reportsPane;
 
-    private final boolean[] loaded = new boolean[10];
+    private final boolean[] loaded = new boolean[11];
 
     @FXML
     public void initialize() {
@@ -68,6 +69,7 @@ public class MainController {
             case 7 -> "/fxml/tabs/genres.fxml";
             case 8 -> "/fxml/tabs/users.fxml";
             case 9 -> "/fxml/tabs/roles.fxml";
+            case 10 -> "/fxml/tabs/reports.fxml";
             default -> null;
         };
 
@@ -82,6 +84,7 @@ public class MainController {
             case 7 -> genresPane;
             case 8 -> usersPane;
             case 9 -> rolesPane;
+            case 10 -> reportsPane;
             default -> null;
         };
 

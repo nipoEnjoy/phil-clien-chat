@@ -6,11 +6,17 @@ import com.npopov.philharmonic.client.session.SessionManager;
 import com.npopov.philharmonic.client.util.AppConfig;
 import com.npopov.philharmonic.client.util.JsonMapper;
 
+import java.lang.reflect.Array;
 import java.net.URI;
+import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
+import static com.npopov.philharmonic.client.util.AppConfig.BASE_URL;
 
 /**
  * Base class for all API clients.
@@ -37,6 +43,23 @@ public abstract class BaseApiClient {
         String body = execute(request);
         return deserializeList(body, ref);
     }
+
+//    public <T> List<T> getList(String path, Map<String, String> params, Class<T> responseType) {
+//        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL + path);
+//        if (params != null) {
+//            params.forEach(builder::queryParam);
+//        }
+//        String url = builder.build().toUriString();
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        if (SessionManager.getInstance().getToken() != null) {
+//            headers.setBearerAuth(SessionManager.getInstance().getToken());
+//        }
+//
+//        HttpEntity<Void> entity = new HttpEntity<>(headers);
+//        ResponseEntity<T[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, (Class<T[]>) Array.newInstance(responseType, 0).getClass());
+//        return Arrays.asList(response.getBody());
+//    }
 
     // ── POST ─────────────────────────────────────────────────────────────────
 
@@ -88,7 +111,7 @@ public abstract class BaseApiClient {
 
     private HttpRequest.Builder anonBuilder(String path) {
         return HttpRequest.newBuilder()
-                .uri(URI.create(AppConfig.BASE_URL + path))
+                .uri(URI.create(BASE_URL + path))
                 .timeout(timeout)
                 .header("Accept", "application/json");
     }

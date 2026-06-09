@@ -16,7 +16,7 @@
                    promptText="🔍  Поиск..."
                    styleClass="search-field"/>
 
-        <HBox fx:id="filterBar" spacing="8" alignment="CENTER_LEFT"/>
+        <FlowPane fx:id="filterBar" hgap="10" vgap="10" alignment="CENTER_LEFT" styleClass="filter-bar"/>
 
         <Region HBox.hgrow="ALWAYS"/>
 

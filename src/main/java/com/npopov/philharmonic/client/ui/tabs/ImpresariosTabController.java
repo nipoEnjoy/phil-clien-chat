@@ -1,16 +1,80 @@
 package com.npopov.philharmonic.client.ui.tabs;
 
+import com.npopov.philharmonic.client.api.ArtistApiClient;
 import com.npopov.philharmonic.client.api.ImpresarioApiClient;
+import com.npopov.philharmonic.client.model.ArtistModel;
 import com.npopov.philharmonic.client.model.ImpresarioModel;
 import com.npopov.philharmonic.client.ui.components.BaseTabController;
+import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.StringConverter;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
 public class ImpresariosTabController extends BaseTabController<ImpresarioModel> {
+
+    private ComboBox<ArtistModel> artistFilter;
+    private ComboBox<String> genreFilter;
+
+    @Override
+    @FXML
+    public void initialize() {
+        artistFilter = new ComboBox<>();
+        artistFilter.setPromptText("Артист");
+        genreFilter = new ComboBox<>();
+        genreFilter.setPromptText("Жанр");
+
+        Button applyBtn = new Button("🔍 Найти");
+        applyBtn.setOnAction(e -> refresh());
+        Button resetBtn = new Button("✖ Сброс");
+        resetBtn.setOnAction(e -> {
+            artistFilter.getSelectionModel().clearSelection();
+            genreFilter.getSelectionModel().clearSelection();
+            refresh();
+        });
+
+        filterBar.getChildren().addAll(artistFilter, genreFilter, applyBtn, resetBtn);
+
+        loadArtists();
+        loadGenres();
+
+        super.initialize();
+    }
+
+    private void loadArtists() {
+        Task<List<ArtistModel>> task = new Task<>() {
+            @Override protected List<ArtistModel> call() { return ArtistApiClient.getInstance().findAll(); }
+        };
+        task.setOnSucceeded(e -> {
+            artistFilter.setItems(FXCollections.observableArrayList(task.getValue()));
+            artistFilter.setConverter(new StringConverter<>() {
+                @Override public String toString(ArtistModel a) { return a == null ? "" : a.getFullName(); }
+                @Override public ArtistModel fromString(String s) { return null; }
+            });
+        });
+        new Thread(task).start();
+    }
+
+    private void loadGenres() { /* аналогично ArtistsTabController */ }
+
+    @Override
+    protected List<ImpresarioModel> loadData() {
+        ArtistModel artist = artistFilter.getValue();
+        String genre = genreFilter.getValue();
+
+        if (artist != null) {
+            return ImpresarioApiClient.getInstance().findByArtist(artist.getId());
+        } else if (genre != null && !genre.isBlank()) {
+            return ImpresarioApiClient.getInstance().findByGenre(genre);
+        } else {
+            return ImpresarioApiClient.getInstance().findAll();
+        }
+    }
 
     @Override
     protected void buildColumns() {
@@ -21,11 +85,6 @@ public class ImpresariosTabController extends BaseTabController<ImpresarioModel>
                 col("Организация", 180,  "organization"),
                 col("Контакт",     180,  "contactInfo")
         );
-    }
-
-    @Override
-    protected List<ImpresarioModel> loadData() {
-        return ImpresarioApiClient.getInstance().findAll();
     }
 
     @Override
